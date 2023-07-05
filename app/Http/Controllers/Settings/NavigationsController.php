@@ -179,7 +179,6 @@ class NavigationsController extends Controller
                 "parent_id" => $parent->parent_id
             );
         }
-        // dd($response);
         return response()->json($response);
     }
 }
