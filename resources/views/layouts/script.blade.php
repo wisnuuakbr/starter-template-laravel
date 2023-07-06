@@ -17,3 +17,5 @@
 <script src="{{ asset('style') }}/assets/js/app.js"></script>
 <!-- Select2 -->
 <script src="{{ asset('style') }}/assets/plugins/select2/js/select2.min.js"></script>
+{{-- popper js --}}
+<script src="https://unpkg.com/@popperjs/core@2"></script>

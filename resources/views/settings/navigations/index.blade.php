@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@include('layouts.head')
+{{-- @include('layouts.head') --}}
 @section('content')
     <div class="row">
         <div class="col-lg-12">
@@ -24,6 +24,7 @@
                             <tbody id="table-posts">
                                 @php $no = 1; @endphp
                                 @if (count($menu) > 0)
+                                    {{-- Data Parent --}}
                                     @foreach ($menu as $parent)
                                         <tr>
                                             <td>{{ $no++ }}</td>
@@ -40,6 +41,7 @@
                                                         class="typcn typcn-trash"></i> DELETE</a>
                                             </td>
                                         </tr>
+                                        {{-- Child Data --}}
                                         @foreach ($parent->children as $child)
                                             <tr>
                                                 <td>{{ $no++ }}</td>

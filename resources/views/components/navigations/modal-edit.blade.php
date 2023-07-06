@@ -50,10 +50,10 @@
     // select2 data parents
     $(document).ready(function() {
         var _token = $('meta[name="csrf-token"]').attr('content');
-        var parentSelect = $('.parent_id');
         $(".parent_id").select2({
-            dropdownParent: $('#modal-edit'),
             placeholder: 'Choose Parent',
+            dropdownParent: $('#modal-edit'),
+            allowClear: true,
             ajax: {
                 url: "{{ route('getNavigations') }}",
                 type: "get",
@@ -90,16 +90,27 @@
                 $('.name').val(response.data.name);
                 $('.url').val(response.data.url);
                 $('.icon').val(response.data.icon);
-                /// Fetch the parent's name based on the parent_id
+                // Fetch the parent's name based on the parent_id
                 var parentName = '';
-                var parentItem = response.parent_items.find(function(item) {
-                    return item.id === response.data.parent_id;
-                });
-                if (parentItem) {
-                    parentName = parentItem.name;
+                if (response.data.parent_id !== null) {
+                    var parentItem = response.parent_items.find(function(item) {
+                        return item.id === response.data.parent_id;
+                    });
+
+                    if (parentItem) {
+                        parentName = parentItem.name;
+                    }
                 }
-                var newOption = new Option(parentName, response.data.parent_id, true, true);
-                $(".parent_id").append(newOption).trigger('change');
+                // Update the Select2 dropdown options
+                var $parentDropdown = $(".parent_id");
+                $parentDropdown.empty();
+                // Add the options to the Select2 dropdown
+                $.each(response.parent_items, function(index, item) {
+                    var option = new Option(item.name, item.id);
+                    $parentDropdown.append(option);
+                });
+                // Set the selected value of the Select2 dropdown
+                $parentDropdown.val(response.data.parent_id).trigger('change');
                 //open modal
                 $('#modal-edit').modal('show');
             }

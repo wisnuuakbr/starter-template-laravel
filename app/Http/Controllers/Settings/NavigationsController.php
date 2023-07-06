@@ -17,7 +17,7 @@ class NavigationsController extends Controller
      */
     public function index()
     {
-        $menu = Navigation::where('parent_id')->paginate(5);
+        $menu = Navigation::whereNull('parent_id')->paginate(5);
         // $menu = Navigation::with('children')->get()
         // dd($menu->toArray());
         // dump($menu->toArray());
@@ -176,7 +176,6 @@ class NavigationsController extends Controller
             $response[] = array(
                 "id"        => $parent->id,
                 "text"      => $parent->name,
-                "parent_id" => $parent->parent_id
             );
         }
         return response()->json($response);
