@@ -14,11 +14,15 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    // protected view for reusable
+    protected $view_users = 'settings.users.';
+
     public function index()
     {
         //
         $user = User::latest()->paginate(10);
-        return view('settings.users.index', ['user' => $user]);
+        return view($this->view_users . 'index', ['user' => $user]);
     }
 
     /**

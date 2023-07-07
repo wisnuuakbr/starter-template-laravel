@@ -8,35 +8,65 @@
             </div>
             <div class="modal-body">
                 <input type="hidden" id="token" value="{{ csrf_token() }}">
-                <div class="form-group">
-                    <label>Nama Menu</label>
-                    <input type="text" name="name" class="form-control" id="name"
-                        placeholder="Type something" />
-                    <div class="alert alert-danger mt-2 d-none" role="alert" id="alert-name"></div>
-                </div>
-                <div class="form-group">
-                    <label>URL</label>
-                    <input type="text" name="url" class="form-control" id="url"
-                        placeholder="Type something" />
-                    <div class="alert alert-danger mt-2 d-none" role="alert" id="alert-url"></div>
-                </div>
-                <div class="form-group">
-                    <label>Icon</label>
-                    <input type="text" name="icon" class="form-control" id="icon"
-                        placeholder="Type something" />
-                    <div class="alert alert-danger mt-2 d-none" role="alert" id="alert-icon"></div>
-                </div>
-                <div class="form-group">
-                    <label>Parent</label>
-                    <select id="parent_id" class="form-control parents_id">
-                        <option value=""></option>
-                    </select>
-                    <div class="alert alert-danger mt-2 d-none" role="alert" id="alert-parent"></div>
-                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Nama Menu<span class="text-danger">*</span></label>
+                            <input type="text" name="name" class="form-control" id="name"
+                                placeholder="Type something" />
+                            <div class="alert alert-danger mt-2 d-none" role="alert" id="alert-name"></div>
+                        </div>
+                        <div class="form-group">
+                            <label>URL<span class="text-danger">*</span></label>
+                            <input type="text" name="url" class="form-control" id="url"
+                                placeholder="Type something" />
+                            <div class="alert alert-danger mt-2 d-none" role="alert" id="alert-url"></div>
+                        </div>
+                        <div class="form-group">
+                            <label>Deskripsi</label>
+                            <textarea name="description" rows="5" class="form-control" id="description" placeholder="Type something"></textarea>
+                            <div class="alert alert-danger mt-2 d-none" role="alert" id="alert-description"></div>
+                        </div>
+                        <small class="form-text">*NB : <em><span class="text-danger">*</span> field must be
+                                filled</em>
+                        </small>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Icon</label>
+                            <input type="text" name="icon" class="form-control" id="icon"
+                                placeholder="Type something" />
+                            <div class="alert alert-danger mt-2 d-none" role="alert" id="alert-icon"></div>
+                        </div>
+                        <div class="form-group">
+                            <label>Urutan</label>
+                            <input type="number" name="sort" class="form-control" id="sort"
+                                placeholder="Type something" />
+                            <div class="alert alert-danger mt-2 d-none" role="alert" id="alert-icon"></div>
+                        </div>
+                        <div class="form-group">
+                            <label>Ditampilkan</label>
+                            <select id="display_st" class="form-control display_st">
+                                <option value="0">Tidak</option>
+                                <option value="1">Ya</option>
+                            </select>
+                            <div class="alert alert-danger mt-2 d-none" role="alert" id="alert-parent"></div>
+                        </div>
+                        <div class="form-group">
+                            <label>Induk Menu</label>
+                            <select id="parent_id" class="form-control parents_id">
+                                <option value=""></option>
+                            </select>
+                            <div class="alert alert-danger mt-2 d-none" role="alert" id="alert-parent"></div>
+                        </div>
+                    </div> <!-- /.modal-col -->
+                </div> <!-- /.modal-row -->
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">TUTUP</button>
-                <button type="button" class="btn btn-primary" id="save">SIMPAN</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i>
+                    TUTUP</button>
+                <button type="button" class="btn btn-success" id="save"><i class="fa fa-check"></i>
+                    SIMPAN</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -88,10 +118,13 @@
         // define variable
         // var token = document.getElementById('token').value;
         var token = $('meta[name="csrf-token"]').attr('content');
-        let name = $('#name').val();
-        let url = $('#url').val();
-        let icon = $('#icon').val();
-        let parent_id = $('#parent_id').val();
+        var name = $('#name').val();
+        var url = $('#url').val();
+        var icon = $('#icon').val();
+        var parent_id = $('#parent_id').val();
+        var sort = $('#sort').val();
+        var description = $('#description').val();
+        var display_st = $('.display_st').val();
 
         // ajax
         $.ajax({
@@ -103,6 +136,9 @@
                 "url": url,
                 "icon": icon,
                 "parent_id": parent_id,
+                "sort": sort,
+                "description": description,
+                "display_st": display_st,
                 "_token": token
             },
             success: function(response) {

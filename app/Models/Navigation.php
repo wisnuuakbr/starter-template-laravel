@@ -15,6 +15,9 @@ class Navigation extends Model
         'name',
         'url',
         'icon',
+        'sort',
+        'description',
+        'display_st'
     ];
 
     public function parent()
@@ -24,7 +27,7 @@ class Navigation extends Model
 
     public function children()
     {
-        return $this->hasMany(self::class, 'parent_id');
+        return $this->hasMany(self::class, 'parent_id')->orderBy('sort', 'asc');
     }
 
     public function subMenus()

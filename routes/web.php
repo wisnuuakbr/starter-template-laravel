@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use app\Http\Controllers\Settings;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Dashboards\HomeController;
 use App\Http\Controllers\Settings\UsersController;
 use App\Http\Controllers\Settings\NavigationsController;
 use App\Models\Navigation;

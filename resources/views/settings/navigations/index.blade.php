@@ -5,7 +5,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-                    <a href="javascript:void(0)" class="btn btn-primary float-right mb-3" id="btn-create-post"><i
+                    <a href="javascript:void(0)" class="btn btn-info float-right mb-3" id="btn-create-post"><i
                             class="typcn typcn-plus"></i>
                         Tambah Data</a>
                     <h5>List Navigation</h5>
@@ -13,25 +13,31 @@
                         <table class="table mb-0">
                             <thead class="thead-default">
                                 <tr>
-                                    <th class="text-center">NO</th>
+                                    <th class="text-center"></th>
                                     <th class="text-center">NAMA MENU</th>
                                     <th class="text-center">URL</th>
-                                    <th class="text-center">ICON</th>
-                                    <th class="text-center">PARENT ID</th>
+                                    <th class="text-center">DITAMPILKAN</th>
                                     <th class="text-center"></th>
                                 </tr>
                             </thead>
                             <tbody id="table-posts">
-                                @php $no = 1; @endphp
+                                {{-- @php $no = 1; @endphp --}}
                                 @if (count($menu) > 0)
                                     {{-- Data Parent --}}
                                     @foreach ($menu as $parent)
                                         <tr>
-                                            <td>{{ $no++ }}</td>
-                                            <td>{{ $parent->name }}</td>
+                                            <td><i class="{{ $parent->icon }}"></i> </td>
+                                            <td>--- {{ $parent->name }}</td>
                                             <td>{{ $parent->url }}</td>
-                                            <td class="text-center">{{ $parent->icon }}</td>
-                                            <td class="text-center">{{ $parent->parent_id }}</td>
+                                            <td class="text-center">
+                                                @if ($parent->display_st == 1)
+                                                    <span class="badge badge-default badge-lg"
+                                                        style="font-size: 12px">YA</span>
+                                                @else
+                                                    <span class="badge badge-dark badge-lg"
+                                                        style="font-size: 12px">TIDAK</span>
+                                                @endif
+                                            </td>
                                             <td class="text-center">
                                                 <a href="javascript:void(0)" id="btn-edit-post"
                                                     data-id="{{ $parent->id }}" class="btn btn-warning btn-sm"><i
@@ -44,11 +50,18 @@
                                         {{-- Child Data --}}
                                         @foreach ($parent->children as $child)
                                             <tr>
-                                                <td>{{ $no++ }}</td>
-                                                <td>--- {{ $child->name }}</td>
+                                                <td><i class="{{ $child->icon }}"></i> </td>
+                                                <td>--- --- {{ $child->name }}</td>
                                                 <td>{{ $child->url }}</td>
-                                                <td class="text-center">{{ $child->icon }}</td>
-                                                <td class="text-center">{{ $child->parent_id }}</td>
+                                                <td class="text-center">
+                                                    @if ($parent->display_st == 1)
+                                                        <span class="badge badge-default badge-lg"
+                                                            style="font-size: 12px">YA</span>
+                                                    @else
+                                                        <span class="badge badge-dark badge-lg"
+                                                            style="font-size: 12px">TIDAK</span>
+                                                    @endif
+                                                </td>
                                                 <td class="text-center">
                                                     <a href="javascript:void(0)" id="btn-edit-post"
                                                         data-id="{{ $child->id }}" class="btn btn-warning btn-sm"><i

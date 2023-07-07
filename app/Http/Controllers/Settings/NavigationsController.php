@@ -10,19 +10,25 @@ use Haruncpi\LaravelIdGenerator\IdGenerator;
 
 class NavigationsController extends Controller
 {
+
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
+    // protected view for reusable
+    protected $view_navigations = 'settings.navigations.';
+
     public function index()
     {
-        $menu = Navigation::whereNull('parent_id')->paginate(5);
+        $menu = Navigation::whereNull('parent_id')->orderby('sort', 'asc')->paginate(5);
         // $menu = Navigation::with('children')->get()
         // dd($menu->toArray());
         // dump($menu->toArray());
         // die;
-        return view('settings.navigations.index', ['menu' => $menu]);
+        return view($this->view_navigations . 'index', ['menu' => $menu]);
     }
 
     /**
@@ -58,11 +64,14 @@ class NavigationsController extends Controller
 
         // create post data
         $data = Navigation::create([
-            'id'        => $id,
-            'parent_id' => $request->parent_id,
-            'name'      => $request->name,
-            'url'       => $request->url,
-            'icon'      => $request->icon
+            'id'            => $id,
+            'parent_id'     => $request->parent_id,
+            'name'          => $request->name,
+            'url'           => $request->url,
+            'icon'          => $request->icon,
+            'sort'          => $request->sort,
+            'description'   => $request->description,
+            'display_st'    => $request->display_st
 
         ]);
 
@@ -132,7 +141,10 @@ class NavigationsController extends Controller
             'name'      => $request->name,
             'url'       => $request->url,
             'icon'      => $request->icon,
-            'parent_id' => $request->parent_id
+            'parent_id' => $request->parent_id,
+            'sort'          => $request->sort,
+            'description'   => $request->description,
+            'display_st'   => $request->display_st
         ]);
 
         // return response

@@ -10,7 +10,7 @@
                             <thead class="thead-default">
                                 <tr>
                                     <th>NO.</th>
-                                    <th>NAMMA LENGKAP</th>
+                                    <th>NAMA</th>
                                     <th>EMAIL</th>
                                 </tr>
                             </thead>
