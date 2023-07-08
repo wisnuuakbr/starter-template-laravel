@@ -47,8 +47,8 @@
                         <div class="form-group">
                             <label>Ditampilkan</label>
                             <select id="display_st" class="form-control display_st">
-                                <option value="0">Tidak</option>
                                 <option value="1">Ya</option>
+                                <option value="0">Tidak</option>
                             </select>
                             <div class="alert alert-danger mt-2 d-none" role="alert" id="alert-parent"></div>
                         </div>

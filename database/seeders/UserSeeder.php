@@ -18,13 +18,13 @@ class UserSeeder extends Seeder
     {
         //
         DB::table('users')->insert([
-            'name' => 'Wisnu',
-            'email' => 'wisnu@gmail.com',
+            'name'              => 'Wisnu',
+            'email'             => 'wisnu@gmail.com',
             'email_verified_at' => now(),
-            'password' => Hash::make('wisnu123'),
-            'remember_token' => Str::random(10),
-            'created_at'  => now(),
-            'updated_at'  => now(),
+            'password'          => Hash::make('wisnu123'),
+            'remember_token'    => Str::random(10),
+            'created_at'        => now(),
+            'updated_at'        => now(),
         ]);
     }
 }

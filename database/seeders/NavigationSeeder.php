@@ -16,21 +16,42 @@ class NavigationSeeder extends Seeder
     public function run()
     {
         Navigation::create([
-            'name'  => 'Settings',
-            'url'  => 'settings',
-            'icon'  => 'mdi mdi-settings',
+            'name'          => 'Home',
+            'url'           => 'home',
+            'icon'          => 'typcn typcn-home-outline',
+            'description'   => 'Dashboard',
+            'display_st'    => '1'
 
         ]);
         Navigation::create([
-            'name'  => 'Navigations',
-            'url'  => 'settings/navigations',
-            'icon'  => '',
+            'name'          => 'Settings',
+            'url'           => 'settings',
+            'icon'          => 'typcn typcn-cog-outline',
+            'description'   => 'Pengaturan Aplikasi',
+            'display_st'    => '1'
 
         ]);
         Navigation::create([
-            'name'  => 'Permissions',
-            'url'  => 'settings/permissions',
-            'icon'  => '',
+            'name'          => 'Navigations',
+            'url'           => 'settings/navigations',
+            'icon'          => '',
+            'description'   => 'Pengaturan Navigasi Menu Aplikasi',
+            'display_st'    => '1'
+
+        ]);
+        Navigation::create([
+            'name'          => 'Management Users',
+            'url'           => 'settings/users',
+            'icon'          => '',
+            'description'   => 'Pengaturan User',
+            'display_st'    => '1'
+        ]);
+        Navigation::create([
+            'name'          => 'Permissions',
+            'url'           => 'permissions',
+            'icon'          => 'typcn typcn-group-outline',
+            'description'   => 'Pengaturan Izin Menu',
+            'display_st'    => '1'
         ]);
     }
 }

@@ -1,8 +1,9 @@
 <ul class="metismenu" id="side-menu">
+    {{-- TODO : all data get from myHelper  --}}
     @foreach (getMenus() as $menu)
         <li class="{{ request()->segment(1) == $menu->url ? 'active open' : '' }}">
             <a href="{{ url($menu->url) }}" class="waves-effect">
-                <i class="{{ $menu->icon }}"></i><span> {{ $menu->name }}
+                <i class="{{ $menu->icon }}" style="font-size: 18px"></i><span> {{ $menu->name }}
                     @if (count($menu->subMenus) > 0)
                         <span class="float-right menu-arrow">
                             <i class="mdi mdi-chevron-right"></i>

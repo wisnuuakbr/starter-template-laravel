@@ -23,10 +23,10 @@
                             <tbody id="table-posts">
                                 {{-- @php $no = 1; @endphp --}}
                                 @if (count($menu) > 0)
-                                    {{-- Data Parent --}}
+                                    {{-- Parent Data --}}
                                     @foreach ($menu as $parent)
                                         <tr>
-                                            <td><i class="{{ $parent->icon }}"></i> </td>
+                                            <td class="text-center"><i class="{{ $parent->icon }} fa-lg"></i> </td>
                                             <td>--- {{ $parent->name }}</td>
                                             <td>{{ $parent->url }}</td>
                                             <td class="text-center">
@@ -50,7 +50,7 @@
                                         {{-- Child Data --}}
                                         @foreach ($parent->children as $child)
                                             <tr>
-                                                <td><i class="{{ $child->icon }}"></i> </td>
+                                                <td class="text-center"><i class="{{ $child->icon }}"></i> </td>
                                                 <td>--- --- {{ $child->name }}</td>
                                                 <td>{{ $child->url }}</td>
                                                 <td class="text-center">
@@ -75,7 +75,7 @@
                                     @endforeach
                                 @else
                                     <div class="alert alert-danger">
-                                        Data is empty!
+                                        Navigations Data is empty!
                                     </div>
                                 @endif
                             </tbody>
