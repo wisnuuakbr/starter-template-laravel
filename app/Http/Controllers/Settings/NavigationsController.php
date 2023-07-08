@@ -69,7 +69,7 @@ class NavigationsController extends Controller
             'name'          => $request->name,
             'url'           => $request->url,
             'icon'          => $request->icon,
-            'sort'          => $request->sort,
+            'sort'          => $request->sort ?? 0,
             'description'   => $request->description,
             'display_st'    => $request->display_st
 

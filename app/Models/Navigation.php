@@ -8,9 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Navigation extends Model
 {
     use HasFactory;
-    // protected $guard = ['id'];
-    // protected $primaryKey = 'id';
+    // TODO : ben iso njupuk id sek string mergo di custom ben ra leading zero nganggo $cast ya brow
+    // define atribute casting
+    protected $casts = [
+        'id' => 'string',
+    ];
     protected $fillable = [
+        'id',
         'parent_id',
         'name',
         'url',
