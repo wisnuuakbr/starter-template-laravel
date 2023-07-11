@@ -167,7 +167,7 @@
         var parent_id = $('.parent_id').val();
         var sort = $('.sort').val();
         var description = $('.description').val();
-        var display_st = $('.display_st').val();
+        var display_st = $('.display_st').select2('data')[0].id;
 
         // ajax
         $.ajax({
@@ -199,7 +199,7 @@
                 }, 1000);
 
                 //close modal
-                $('#modal-create').modal('hide');
+                $('#modal-edit').modal('hide');
             },
             error: function(response) {
                 Swal.fire({

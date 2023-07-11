@@ -54,7 +54,7 @@
                                                 <td>--- --- {{ $child->name }}</td>
                                                 <td>{{ $child->url }}</td>
                                                 <td class="text-center">
-                                                    @if ($parent->display_st == 1)
+                                                    @if ($child->display_st == 1)
                                                         <span class="badge badge-default badge-lg"
                                                             style="font-size: 12px">YA</span>
                                                     @else

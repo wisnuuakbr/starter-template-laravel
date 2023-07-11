@@ -29,5 +29,12 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
+    // * Goole O-Auth
+    'google' => [
+        'client_id' => env('GOOGLE_CLIENT_ID'),
+        'client_secret' => env('GOOGLE_CLIENT_SECRET'),
+        // 'redirect' => env('GOOGLE_REDIRECT_URI'),
+        'redirect' => env('APP_ENV') === 'xampp' ? env('XAMPP_REDIRECT_URI') : env('LARAGON_REDIRECT_URI'),
+    ],
 
 ];

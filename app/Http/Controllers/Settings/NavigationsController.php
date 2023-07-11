@@ -138,13 +138,13 @@ class NavigationsController extends Controller
 
         // update data data
         $data->update([
-            'name'      => $request->name,
-            'url'       => $request->url,
-            'icon'      => $request->icon,
-            'parent_id' => $request->parent_id,
+            'name'          => $request->name,
+            'url'           => $request->url,
+            'icon'          => $request->icon,
+            'parent_id'     => $request->parent_id,
             'sort'          => $request->sort,
             'description'   => $request->description,
-            'display_st'   => $request->display_st
+            'display_st'    => $request->display_st
         ]);
 
         // return response
