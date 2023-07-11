@@ -21,16 +21,6 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
 ### Premium Partners
 
 - **[Vehikl](https://vehikl.com/)**
@@ -46,6 +36,46 @@ We would like to extend our thanks to the following sponsors for funding Laravel
 - **[OP.GG](https://op.gg)**
 - **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
 - **[Lendio](https://lendio.com)**
+
+## Requirements
+To run this program, you need PHP version 8 or higher.
+
+## Installation
+Make sure all requirements are installed on the system.
+Clone the project and install dependencies:
+```bash
+$ git clone https://github.com/wisnuuakbr/laravel_template_builder.git
+$ composer install
+```
+
+## Configuration
+Copy the .env.example file and rename it to .env.
+
+Then, create a database named "template_builder" in your SQL Database.
+OR
+You can custom your own database name, and make sure your configuration of your database is same
+
+## Generate App Key
+Generate the application key using the following command:
+```bash
+$ php artisan key:generate
+```
+
+## Migration & Seeder
+Run the migrations table:
+```bash
+$ php artisan migrate
+```
+Run the seeder:
+```bash
+$ php artisan db:seed
+```
+
+## Run Application
+Run the application:
+```bash
+$ php artisan serve
+```
 
 ## Contributing
 
