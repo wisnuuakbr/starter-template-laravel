@@ -29,7 +29,7 @@
                             <div class="alert alert-danger mt-2 d-none" role="alert" id="alert-description"></div>
                         </div>
                         <small class="form-text">*NB : <em><span class="text-danger">*</span>
-                                field must be filled</em>
+                                (field must be filled)</em>
                         </small>
                     </div>
                     <div class="col-md-6">

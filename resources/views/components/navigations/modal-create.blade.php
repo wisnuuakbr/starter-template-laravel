@@ -14,21 +14,18 @@
                             <label>Nama Menu<span class="text-danger">*</span></label>
                             <input type="text" name="name" class="form-control" id="name"
                                 placeholder="Type something" />
-                            <div class="alert alert-danger mt-2 d-none" role="alert" id="alert-name"></div>
                         </div>
                         <div class="form-group">
                             <label>URL<span class="text-danger">*</span></label>
                             <input type="text" name="url" class="form-control" id="url"
                                 placeholder="Type something" />
-                            <div class="alert alert-danger mt-2 d-none" role="alert" id="alert-url"></div>
                         </div>
                         <div class="form-group">
                             <label>Deskripsi</label>
                             <textarea name="description" rows="5" class="form-control" id="description" placeholder="Type something"></textarea>
-                            <div class="alert alert-danger mt-2 d-none" role="alert" id="alert-description"></div>
                         </div>
-                        <small class="form-text">*NB : <em><span class="text-danger">*</span> field must be
-                                filled</em>
+                        <small class="form-text">*NB : <em><span class="text-danger">*</span> (field must be
+                                filled)</em>
                         </small>
                     </div>
                     <div class="col-md-6">
@@ -36,13 +33,11 @@
                             <label>Icon</label>
                             <input type="text" name="icon" class="form-control" id="icon"
                                 placeholder="Type something" />
-                            <div class="alert alert-danger mt-2 d-none" role="alert" id="alert-icon"></div>
                         </div>
                         <div class="form-group">
                             <label>Urutan</label>
                             <input type="number" name="sort" class="form-control" id="sort"
                                 placeholder="Type something" />
-                            <div class="alert alert-danger mt-2 d-none" role="alert" id="alert-icon"></div>
                         </div>
                         <div class="form-group">
                             <label>Ditampilkan</label>
@@ -50,14 +45,12 @@
                                 <option value="1">Ya</option>
                                 <option value="0">Tidak</option>
                             </select>
-                            <div class="alert alert-danger mt-2 d-none" role="alert" id="alert-parent"></div>
                         </div>
                         <div class="form-group">
                             <label>Induk Menu</label>
                             <select id="parent_id" class="form-control parents_id">
                                 <option value=""></option>
                             </select>
-                            <div class="alert alert-danger mt-2 d-none" role="alert" id="alert-parent"></div>
                         </div>
                     </div> <!-- /.modal-col -->
                 </div> <!-- /.modal-row -->

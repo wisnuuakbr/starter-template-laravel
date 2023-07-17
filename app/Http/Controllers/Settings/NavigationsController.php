@@ -19,7 +19,7 @@ class NavigationsController extends Controller
      */
 
     // protected view for reusable
-    protected $view_navigations = 'settings.navigations.';
+    protected $view_navigations = 'settings/navigations/';
 
     public function index()
     {

@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Settings;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 
 
 class UsersController extends Controller
@@ -16,7 +19,7 @@ class UsersController extends Controller
      */
 
     // protected view for reusable
-    protected $view_users = 'settings.users.';
+    protected $view_users = 'settings/users/';
 
     public function index()
     {
@@ -43,7 +46,31 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name'      => ['required', 'string', 'max:255'],
+            'email'     => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password'  => ['required', 'min:6', 'confirmed']
+        ]);
+
+        //check validasi fail
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
+        // create post data
+        $data = User::create([
+            'name'          => $request->name,
+            'email'         => $request->email,
+            'password'      => Hash::make($request->password)
+
+        ]);
+
+        // return response
+        return response()->json([
+            'success'   => true,
+            'message'   => 'Data berhasil disimpan!',
+            'data'      => $data
+        ]);
     }
 
     /**
@@ -54,7 +81,13 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        //
+        // get detail data
+        $data = User::find($id);
+        return response()->json([
+            'success'   => true,
+            'message'   => 'Detail data',
+            'data'      => $data,
+        ]);
     }
 
     /**
@@ -77,7 +110,33 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // define id
+        $data = User::find($id);
+        //define validasi
+        $validator = Validator::make($request->all(), [
+            'name'          => ['required', 'string', 'max:255'],
+            'email'         => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($id)],
+            'password'      => ['nullable', 'min:6', 'confirmed']
+        ]);
+
+        //check validasi fail
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
+        // update data data
+        $data->update([
+            'name'       => $request->name,
+            'email'      => $request->email,
+            'password'   => Hash::make($request->password)
+        ]);
+
+        // return response
+        return response()->json([
+            'success'   => true,
+            'message'   => 'Data berhasil disimpan!',
+            'data'      => $data
+        ]);
     }
 
     /**
@@ -88,6 +147,13 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //delete Users by ID
+        User::where('id', $id)->delete();
+
+        //return response
+        return response()->json([
+            'success' => true,
+            'message' => 'Data Berhasil Dihapus!'
+        ]);
     }
 }

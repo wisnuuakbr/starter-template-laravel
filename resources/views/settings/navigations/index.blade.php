@@ -5,10 +5,10 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-                    <a href="javascript:void(0)" class="btn btn-info float-right mb-3" id="btn-create-post"><i
+                    <a href="javascript:void(0)" class="btn btn-primary float-right mb-3" id="btn-create-post"><i
                             class="typcn typcn-plus"></i>
                         Tambah Data</a>
-                    <h5>List Navigation</h5>
+                    <h3 class="mt-0 header-title">List Navigations</h3>
                     <div class="table-responsive">
                         <table class="table mb-0">
                             <thead class="thead-default">
