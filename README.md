@@ -44,7 +44,7 @@ To run this program, you need PHP version 8 or higher.
 Make sure all requirements are installed on the system.
 Clone the project and install dependencies:
 ```bash
-$ git clone https://github.com/wisnuuakbr/laravel_template_builder.git
+$ git clone https://github.com/wisnuuakbr/StarterTemplateLaravel.git
 $ composer install
 ```
 
