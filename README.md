@@ -21,30 +21,19 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-
 ## Requirements
-To run this program, you need PHP version 8 or higher.
+Starter template laravel is currently extended with the following requirements.  
+Instructions on how to use them in your own application are linked below.
+| Requirement | Version   |
+|-------------|-----------|
+| PHP         |   8.1.10  |
+| Mysql       |   8.0.30  |
 
 ## Installation
 Make sure all requirements are installed on the system.
 Clone the project and install dependencies:
 ```bash
-$ git clone https://github.com/wisnuuakbr/StarterTemplateLaravel.git
+$ git clone https://github.com/wisnuuakbr/starter-template-laravel.git
 $ composer install
 ```
 
@@ -53,7 +42,7 @@ Copy the .env.example file and rename it to .env.
 
 Then, create a database named "template_builder" in your SQL Database.
 OR
-You can custom your own database name, and make sure your configuration of your database is same
+You can custom your own database name, and make sure you configuration on your .env
 
 ## Generate App Key
 Generate the application key using the following command:
