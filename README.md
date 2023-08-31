@@ -42,11 +42,16 @@ $ composer install
 ```
 
 ## Configuration
-Copy the .env.example file and rename it to .env.
-
-Then, create a database named "template_builder" in your SQL Database.
-OR
-You can custom your own database name, and make sure you configuration on your .env
+Copy the .env.example file and rename it to .env  
+Change the config for your local server
+```bash
+DB_CONNECTION=mysql
+DB_HOST=localhost
+DB_PORT=3306
+DB_DATABASE=template_builder
+DB_USERNAME=root
+DB_PASSWORD=
+```
 
 ## Generate App Key
 Generate the application key using the following command:
