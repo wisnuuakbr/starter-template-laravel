@@ -72,8 +72,4 @@
             </div>
         </div>
     </div>
-    <div class="m-t-40 text-center text-white-50">
-        <p>© 2018 - 2019 Starter Template <i class="mdi mdi-heart text-danger"></i> by <a
-                href="https://www.instagram.com/wisnuuakbr_/" class="text-white">Wisnu Akbara</a></p>
-    </div>
 @endsection

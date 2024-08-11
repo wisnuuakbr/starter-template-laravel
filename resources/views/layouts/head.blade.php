@@ -7,22 +7,13 @@
     <meta content="Themesbrand" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    {{-- @section('head')
-        <meta name="csrf_token" content="{{ csrf_token() }}" />
-    @endsection --}}
-
     <!-- App Icons -->
     <link rel="shortcut icon" href="{{ asset('style') }}/assets/images/favicon.ico">
-
-    <!--Morris Chart CSS -->
-    <link rel="stylesheet" href="{{ asset('style') }}/assets/plugins/morris/morris.css">
-
     <!-- Basic Css files -->
     <link href="{{ asset('style') }}/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="{{ asset('style') }}/assets/css/metismenu.min.css" rel="stylesheet" type="text/css">
     <link href="{{ asset('style') }}/assets/css/icons.css" rel="stylesheet" type="text/css">
     <link href="{{ asset('style') }}/assets/css/style.css" rel="stylesheet" type="text/css">
-    <link href="{{ asset('style') }}/assets/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <!-- Plugins -->
+    <link href="{{ asset('plugins/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
 </head>

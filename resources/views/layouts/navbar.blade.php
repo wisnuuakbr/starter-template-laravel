@@ -1,12 +1,3 @@
-<div class="search-wrap" id="search-wrap">
-    <div class="search-bar">
-        <input class="search-input" type="search" placeholder="Search" />
-        <a href="#" class="close-search toggle-search" data-target="#search-wrap">
-            <i class="mdi mdi-close-circle"></i>
-        </a>
-    </div>
-</div>
-
 <ul class="navbar-right d-flex list-inline float-right mb-0">
 
     <li class="list-inline-item dropdown notification-list">
@@ -75,8 +66,8 @@
         <a class="nav-link dropdown-toggle arrow-none waves-effect nav-user" data-toggle="dropdown" href="#"
             role="button" aria-haspopup="false" aria-expanded="false">
             <img src="{{ asset('style') }}/assets/images/users/avatar-6.jpg" alt="user" class="rounded-circle">
-            {{-- <span class="d-none d-md-inline-block ml-1">{{ Auth::user()->name }} <i class="mdi mdi-chevron-down"></i>
-            </span> --}}
+            <span class="d-none d-md-inline-block ml-1">{{ Auth::user()->name }} <i class="mdi mdi-chevron-down"></i>
+            </span>
         </a>
         <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated profile-dropdown">
             <a class="dropdown-item" href="#"><i class="dripicons-user text-muted"></i>

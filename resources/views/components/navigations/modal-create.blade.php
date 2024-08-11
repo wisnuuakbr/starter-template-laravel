@@ -64,12 +64,16 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div>
-{{-- script --}}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- Script -->
+<script src="{{ asset('style') }}/assets/js/jquery.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
+    //button create post event
+    $('body').on('click', '#btn-create-post', function() {
+        //open modal
+        $('#modal-create').modal('show');
+    });
+
     // select2 data parents
     $(document).ready(function() {
         var _token = $('meta[name="csrf-token"]').attr('content');
@@ -95,21 +99,14 @@
                 },
                 cache: true
             }
-
         });
 
     });
 
-    //button create post event
-    $('body').on('click', '#btn-create-post', function() {
-        //open modal
-        $('#modal-create').modal('show');
-    });
+
     //action create post
     $('#save').click(function(e) {
         e.preventDefault();
-        // define variable
-        // var token = document.getElementById('token').value;
         var token = $('meta[name="csrf-token"]').attr('content');
         var name = $('#name').val();
         var url = $('#url').val();
@@ -147,11 +144,6 @@
                 setTimeout(function() { // wait for 1 secs(2)
                     location.reload(); // then reload the page.(3)
                 }, 1000);
-
-                //clear form if not reload
-                // $('#name').val('');
-                // $('#url').val('');
-                // $('#icon').val('');
 
                 //close modal
                 $('#modal-create').modal('hide');

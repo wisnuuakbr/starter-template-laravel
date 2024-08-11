@@ -1,22 +1,4 @@
 @extends('layouts.master')
-@section('breadcrumb')
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="page-title-box">
-                <div class="row align-items-center">
-                    <div class="col-md-8">
-                        <h4 class="page-title mb-0">Home</h4>
-                        <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Home</li>
-                        </ol>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-@endsection
 @section('content')
     <div class="row">
         <div class="col-xl-3 col-md-6">

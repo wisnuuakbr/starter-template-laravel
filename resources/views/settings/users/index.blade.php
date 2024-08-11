@@ -12,18 +12,18 @@
                         <table class="table mb-0">
                             <thead class="thead-default">
                                 <tr>
-                                    <th>NO.</th>
-                                    <th>NAMA</th>
-                                    <th>EMAIL</th>
-                                    <th></th>
+                                    <th class="text-center">NO.</th>
+                                    <th class="text-center">NAMA</th>
+                                    <th class="text-center">EMAIL</th>
+                                    <th class="text-center"></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @php $no = 1; @endphp
                                 @forelse ($user as $data)
                                     <tr>
-                                        <th>{{ $no++ }}</th>
-                                        <td>{{ $data->name }}</td>
+                                        <th class="text-center">{{ $no++ }}</th>
+                                        <td >{{ $data->name }}</td>
                                         <td>{{ $data->email }}</td>
                                         <td class="text-center">
                                             <a href="javascript:void(0)" id="btn-edit-post" data-id="{{ $data->id }}"

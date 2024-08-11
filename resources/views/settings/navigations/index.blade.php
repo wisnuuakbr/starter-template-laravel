@@ -1,13 +1,13 @@
 @extends('layouts.master')
-{{-- @include('layouts.head') --}}
 @section('content')
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
                     <a href="javascript:void(0)" class="btn btn-primary float-right mb-3" id="btn-create-post"><i
-                            class="typcn typcn-plus"></i>
-                        Tambah Data</a>
+                        class="typcn typcn-plus"></i>
+                        Tambah Data
+                    </a>
                     <h3 class="mt-0 header-title">List Navigations</h3>
                     <div class="table-responsive">
                         <table class="table mb-0">

@@ -12,13 +12,13 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Nama<span class="text-danger">*</span></label>
-                            <input type="text" name="name" class="form-control name" id="name"
+                            <input type="text" name="name" class="form-control name"
                                 placeholder="Masukkan Nama" />
                             <div class="alert alert-danger mt-2 d-none" role="alert" id="alert-name"></div>
                         </div>
                         <div class="form-group">
                             <label>Email<span class="text-danger">*</span></label>
-                            <input type="text" name="email" class="form-control icon email" id="email"
+                            <input type="text" name="email" class="form-control icon email"
                                 placeholder="Type something" />
                             <div class="alert alert-danger mt-2 d-none" role="alert" id="alert-icon"></div>
                         </div>
@@ -29,12 +29,12 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="password">Password</label>
-                            <input type="password" class="form-control password" name="password" id="password"
+                            <input type="password" class="form-control password" name="password"
                                 placeholder="Enter new password">
                         </div>
                         <div class="form-group">
                             <label for="password-confirm">Confirm Password</label></label>
-                            <input id="password-confirm" type="password" class="form-control password-confirm"
+                            <input type="password" class="form-control password-confirm"
                                 name="password_confirmation" autocomplete="new-password"
                                 placeholder="Enter confirm password">
                         </div>
@@ -50,10 +50,9 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div>
-{{-- script --}}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- Script -->
+<script src="{{ asset('style') }}/assets/js/jquery.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <script type="text/javascript">
     // fetch data
     $('body').on('click', '#btn-edit-post', function() {

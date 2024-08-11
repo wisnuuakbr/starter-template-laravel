@@ -36,7 +36,10 @@
     <div class="wrapper-page">
 
         @yield('content')
-
+        <div class="m-t-40 text-center text-white-50">
+            <p>© 2018 - 2019 Starter Template <i class="mdi mdi-heart text-danger"></i> by <a
+                    href="https://github.com/wisnuuakbr" class="text-white">Wisnu Akbara</a></p>
+        </div>
     </div>
     <!-- end wrapper-page -->
 
