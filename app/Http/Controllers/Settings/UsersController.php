@@ -23,19 +23,26 @@ class UsersController extends Controller
 
     public function index()
     {
-        //
         $user = User::latest()->paginate(10);
         return view($this->view_users . 'index', ['user' => $user]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    //  Generate the ID for Users
+    private function generateUserId()
     {
-        //
+        // Get last user_id from db
+        $lastUser = User::orderBy('user_id', 'desc')->first();
+
+        // If user == empty create id from '01001'
+        if (!$lastUser) {
+            return '01001';
+        }
+
+        // Get last id, increment +1
+        $lastId = intval($lastUser->user_id);
+        $newId = str_pad($lastId + 1, 5, '0', STR_PAD_LEFT);
+
+        return $newId;
     }
 
     /**
@@ -47,9 +54,11 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name'      => ['required', 'string', 'max:255'],
-            'email'     => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password'  => ['required', 'min:6', 'confirmed']
+            'user_name' => ['required', 'string', 'max:10'],
+            'user_full_name' => ['required', 'string', 'max:255'],
+            'user_mail' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'user_pass' => ['required', 'min:8'],
+            'password_confirmation' => ['required', 'same:user_pass']
         ]);
 
         //check validasi fail
@@ -59,9 +68,11 @@ class UsersController extends Controller
 
         // create post data
         $data = User::create([
-            'name'          => $request->name,
-            'email'         => $request->email,
-            'password'      => Hash::make($request->password)
+            'user_id'        => $this->generateUserId(),
+            'user_name'      => $request->user_name,
+            'user_full_name' => $request->user_full_name,
+            'user_mail'      => $request->user_mail,
+            'user_pass'      => Hash::make($request->user_pass)
 
         ]);
 
@@ -76,13 +87,13 @@ class UsersController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $user_id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($user_id)
     {
         // get detail data
-        $data = User::find($id);
+        $data = User::find($user_id);
         return response()->json([
             'success'   => true,
             'message'   => 'Detail data',
@@ -93,10 +104,10 @@ class UsersController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $user_id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($user_id)
     {
         //
     }
@@ -105,18 +116,20 @@ class UsersController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  int  $user_id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $user_id)
     {
         // define id
-        $data = User::find($id);
+        $data = User::findOrFail($user_id);
         //define validasi
         $validator = Validator::make($request->all(), [
-            'name'          => ['required', 'string', 'max:255'],
-            'email'         => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($id)],
-            'password'      => ['nullable', 'min:6', 'confirmed']
+            'user_name' => ['required', 'string', 'max:10'],
+            'user_full_name' => ['required', 'string', 'max:255'],
+            'user_mail' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user_id, 'user_id')],
+            'user_pass' => ['nullable', 'string', 'min:8'],
+            'password_confirmation' => ['same:user_pass']
         ]);
 
         //check validasi fail
@@ -124,12 +137,20 @@ class UsersController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
-        // update data data
-        $data->update([
-            'name'       => $request->name,
-            'email'      => $request->email,
-            'password'   => Hash::make($request->password)
-        ]);
+        // update field data
+        $updateData = [
+            'user_name'      => $request->user_name,
+            'user_full_name' => $request->user_full_name,
+            'user_mail'      => $request->user_mail,
+        ];
+
+        // Update password jika diberikan
+        if ($request->filled('user_pass')&& !empty($request->user_pass)) {
+            $updateData['user_pass'] = Hash::make($request->user_pass);
+        }
+
+        // Update data
+        $data->update($updateData);
 
         // return response
         return response()->json([
@@ -142,13 +163,13 @@ class UsersController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int  $user_id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($user_id)
     {
         //delete Users by ID
-        User::where('id', $id)->delete();
+        User::where('user_id', $user_id)->delete();
 
         //return response
         return response()->json([

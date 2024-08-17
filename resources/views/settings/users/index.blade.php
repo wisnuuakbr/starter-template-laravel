@@ -12,10 +12,11 @@
                         <table class="table mb-0">
                             <thead class="thead-default">
                                 <tr>
-                                    <th class="text-center">NO.</th>
-                                    <th class="text-center">NAMA</th>
-                                    <th class="text-center">EMAIL</th>
-                                    <th class="text-center"></th>
+                                    <th class="text-center text-uppercase">No.</th>
+                                    <th class="text-center text-uppercase">Nama</th>
+                                    <th class="text-center text-uppercase">Email</th>
+                                    <th class="text-center text-uppercase">Role</th>
+                                    <th class="text-center text-uppercase"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -23,12 +24,13 @@
                                 @forelse ($user as $data)
                                     <tr>
                                         <th class="text-center">{{ $no++ }}</th>
-                                        <td >{{ $data->name }}</td>
-                                        <td>{{ $data->email }}</td>
+                                        <td >{{ $data->user_name }}</td>
+                                        <td>{{ $data->user_mail }}</td>
+                                        <td></td>
                                         <td class="text-center">
-                                            <a href="javascript:void(0)" id="btn-edit-post" data-id="{{ $data->id }}"
+                                            <a href="javascript:void(0)" id="btn-edit-post" data-id="{{ $data->user_id }}"
                                                 class="btn btn-warning btn-sm"><i class="typcn typcn-edit"></i> EDIT</a>
-                                            <a href="javascript:void(0)" id="btn-delete-post" data-id="{{ $data->id }}"
+                                            <a href="javascript:void(0)" id="btn-delete-post" data-id="{{ $data->user_id }}"
                                                 class="btn btn-danger btn-sm"><i class="typcn typcn-trash"></i> DELETE</a>
                                         </td>
                                     </tr>

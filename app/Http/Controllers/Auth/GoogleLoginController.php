@@ -23,7 +23,7 @@ class GoogleLoginController extends Controller
         $user = Socialite::driver('google')->stateless()->user();
 
         // Check if the user already exists in your database
-        $existingUser = User::where('email', $user->email)->first();
+        $existingUser = User::where('user_main', $user->user_mail)->first();
 
         if ($existingUser) {
             // Log in the existing user
@@ -31,9 +31,9 @@ class GoogleLoginController extends Controller
         } else {
             // Create a new user record
             $newUser = User::create([
-                'name' => $user->name,
-                'email' => $user->email,
-                'password' => bcrypt('123456'),
+                'user_name' => $user->user_name,
+                'user_main' => $user->user_mail,
+                'user_pass' => bcrypt('123456'),
                 // Set any other fields you want to populate
             ]);
 

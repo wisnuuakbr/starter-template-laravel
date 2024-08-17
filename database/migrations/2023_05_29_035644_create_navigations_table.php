@@ -14,13 +14,13 @@ class CreateNavigationsTable extends Migration
     public function up()
     {
         Schema::create('navigations', function (Blueprint $table) {
-            $table->string('id', 10)->primary();
+            $table->string('nav_id', 10)->primary();
             $table->string('parent_id', 10)->nullable();
-            $table->string('name', 50);
-            $table->string('url', 100);
-            $table->string('icon', 50)->nullable();
-            $table->string('description', 100)->nullable();
-            $table->unsignedInteger('sort')->nullable()->default(0);
+            $table->string('nav_title', 50);
+            $table->string('nav_url', 100);
+            $table->string('nav_icon', 50)->nullable();
+            $table->string('nav_desc', 100)->nullable();
+            $table->unsignedInteger('nav_no')->nullable()->default(0);
             $table->enum('display_st', ['1', '0'])->nullable()->default('1');
             $table->timestamps();
         });

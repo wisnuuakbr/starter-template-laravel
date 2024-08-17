@@ -14,9 +14,9 @@
                     @csrf
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input type="text" class="form-control  @error('name') is-invalid @enderror" name="name"
-                            value="{{ old('name') }}" required id="name" placeholder="Enter your Name">
-                        @error('name')
+                        <input type="text" class="form-control  @error('user_name') is-invalid @enderror" name="user_name"
+                            value="{{ old('user_name') }}" id="user_name" placeholder="Enter your Name">
+                        @error('user_name')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -24,9 +24,9 @@
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" class="form-control  @error('name') is-invalid @enderror" name="email"
-                            value="{{ old('email') }}" required id="email" placeholder="Enter your Email">
-                        @error('email')
+                        <input type="email" class="form-control  @error('user_mail') is-invalid @enderror" name="user_mail"
+                            value="{{ old('user_mail') }}" id="user_mail" placeholder="Enter your Email">
+                        @error('user_mail')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -34,9 +34,9 @@
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
-                        <input type="password" class="form-control @error('password') is-invalid @enderror" name="password"
-                            required id="password" placeholder="Enter your Password">
-                        @error('password')
+                        <input type="password" class="form-control @error('user_pass') is-invalid @enderror" name="user_pass"
+                         id="user_pass" placeholder="Enter your Password">
+                        @error('user_pass')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -45,7 +45,7 @@
                     <div class="form-group">
                         <label for="password-confirm">Confirm Password</label></label>
                         <input id="password-confirm" type="password" class="form-control" name="password_confirmation"
-                            required autocomplete="new-password" placeholder="Enter your Password">
+                         autocomplete="new-password" placeholder="Enter your Password">
                     </div>
                     <div class="form-group row m-t-20">
                         <div class="col-12 text-right">

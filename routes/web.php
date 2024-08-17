@@ -1,11 +1,16 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use app\Http\Controllers\Settings;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Dashboards\HomeController;
 use App\Http\Controllers\Settings\UsersController;
 use App\Http\Controllers\Settings\NavigationsController;
+use App\Http\Controllers\Roles\RolesController;
+
+// google login
 use App\Http\Controllers\Auth\GoogleLoginController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -18,11 +23,21 @@ use App\Http\Controllers\Auth\GoogleLoginController;
 |
 */
 // Login Route
-Route::get('/', function () {
-    return view('auth.login');
-})->name('login');
+// Route::get('/', function () {
+//     return view('auth.login');
+// })->name('login');
 
-Auth::routes();
+// Auth::routes();
+
+// Auth User
+Route::get('login', [LoginController::class, 'login'])->name('login');
+Route::post('login', [LoginController::class, 'authenticate'])->name('auth.authenticate');
+
+Route::post('logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
+
+Route::get('register', [RegisterController::class, 'register'])->name('register');
+Route::post('register', [RegisterController::class, 'store'])->name('auth.store');
+
 // Google O-Auth
 Route::get('/auth/google', [GoogleLoginController::class, 'redirectToGoogle'])->name('google.login');
 Route::get('/auth/google/callback', [GoogleLoginController::class, 'handleGoogleCallback']);
@@ -31,7 +46,7 @@ Route::get('/auth/google/callback', [GoogleLoginController::class, 'handleGoogle
 Route::middleware(['auth'])->group(function () {
     // Home Route
     route::get('home', [HomeController::class, 'index'])->name('home');
-    // Users Route
+    // Management Users Route
     route::get('settings/users', [UsersController::class, 'index'])->name('users');
     route::post('settings/users/store', [UsersController::class, 'store'])->name('users.store');
     route::delete('settings/users/delete/{user_id}', [UsersController::class, 'destroy'])->name('users.destroy');
@@ -40,4 +55,5 @@ Route::middleware(['auth'])->group(function () {
     // Navigations Route
     route::resource('settings/navigations', NavigationsController::class);
     route::get('getNavigations', [NavigationsController::class, 'getNavigations'])->name('getNavigations');
+
 });

@@ -15,13 +15,18 @@
                         experience.
                     </p>
                 </div>
-                <form class="form-horizontal" action="{{ url('/login') }}" method="POST">
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+                <form class="form-horizontal" action="{{ url('login') }}" method="POST">
                     @csrf
                     <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" class="form-control @error('email') is-invalid @enderror" name="email"
-                            value="{{ old('email') }}" required autocomplete="email" placeholder="Enter your Email">
-                        @error('email')
+                        <label for="email">Username</label>
+                        <input type="text" class="form-control @error('user_mail') is-invalid @enderror" name="user_mail"
+                            value="{{ old('user_mail') }}" required autocomplete="email" placeholder="Enter your Email or Username">
+                        @error('user_mail')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -29,9 +34,9 @@
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
-                        <input type="password" class="form-control @error('password') is-invalid @enderror" name="password"
+                        <input type="password" class="form-control @error('user_pass') is-invalid @enderror" name="user_pass"
                             required id="password" placeholder="Enter your Password">
-                        @error('password')
+                        @error('user_pass')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -45,8 +50,8 @@
                             </div>
                         </div>
                         <div class="col-sm-6 text-right">
-                            <a href="{{ route('password.request') }}" class="text-muted"><i class="mdi mdi-lock"></i> Forgot
-                                your password?</a>
+                            {{-- <a href="{{ route('password.request') }}" class="text-muted"><i class="mdi mdi-lock"></i> Forgot
+                                your password?</a> --}}
                         </div>
                     </div>
                     <div class="form-group">

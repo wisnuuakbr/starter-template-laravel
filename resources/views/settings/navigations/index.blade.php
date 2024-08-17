@@ -13,11 +13,11 @@
                         <table class="table mb-0">
                             <thead class="thead-default">
                                 <tr>
-                                    <th class="text-center"></th>
-                                    <th class="text-center">NAMA MENU</th>
-                                    <th class="text-center">URL</th>
-                                    <th class="text-center">DITAMPILKAN</th>
-                                    <th class="text-center"></th>
+                                    <th class="text-center text-uppercase"></th>
+                                    <th class="text-center text-uppercase">Nama Menu</th>
+                                    <th class="text-center text-uppercase">Url</th>
+                                    <th class="text-center text-uppercase">Ditampilkan</th>
+                                    <th class="text-center text-uppercase"></th>
                                 </tr>
                             </thead>
                             <tbody id="table-posts">
@@ -26,9 +26,9 @@
                                     {{-- Parent Data --}}
                                     @foreach ($menu as $parent)
                                         <tr>
-                                            <td class="text-center"><i class="{{ $parent->icon }} fa-lg"></i> </td>
-                                            <td>--- {{ $parent->name }}</td>
-                                            <td>{{ $parent->url }}</td>
+                                            <td class="text-center"><i class="{{ $parent->nav_icon }} fa-lg"></i> </td>
+                                            <td>--- {{ $parent->nav_title }}</td>
+                                            <td>{{ $parent->nav_url }}</td>
                                             <td class="text-center">
                                                 @if ($parent->display_st == 1)
                                                     <span class="badge badge-default badge-lg"
@@ -40,19 +40,19 @@
                                             </td>
                                             <td class="text-center">
                                                 <a href="javascript:void(0)" id="btn-edit-post"
-                                                    data-id="{{ $parent->id }}" class="btn btn-warning btn-sm"><i
+                                                    data-id="{{ $parent->nav_id }}" class="btn btn-warning btn-sm"><i
                                                         class="typcn typcn-edit"></i> EDIT</a>
                                                 <a href="javascript:void(0)" id="btn-delete-post"
-                                                    data-id="{{ $parent->id }}" class="btn btn-danger btn-sm"><i
+                                                    data-id="{{ $parent->nav_id }}" class="btn btn-danger btn-sm"><i
                                                         class="typcn typcn-trash"></i> DELETE</a>
                                             </td>
                                         </tr>
                                         {{-- Child Data --}}
                                         @foreach ($parent->children as $child)
                                             <tr>
-                                                <td class="text-center"><i class="{{ $child->icon }}"></i> </td>
-                                                <td>--- --- {{ $child->name }}</td>
-                                                <td>{{ $child->url }}</td>
+                                                <td class="text-center"><i class="{{ $child->nav_icon }}"></i> </td>
+                                                <td>--- --- {{ $child->nav_title }}</td>
+                                                <td>{{ $child->nav_url }}</td>
                                                 <td class="text-center">
                                                     @if ($child->display_st == 1)
                                                         <span class="badge badge-default badge-lg"
@@ -64,10 +64,10 @@
                                                 </td>
                                                 <td class="text-center">
                                                     <a href="javascript:void(0)" id="btn-edit-post"
-                                                        data-id="{{ $child->id }}" class="btn btn-warning btn-sm"><i
+                                                        data-id="{{ $child->nav_id }}" class="btn btn-warning btn-sm"><i
                                                             class="typcn typcn-edit"></i> EDIT</a>
                                                     <a href="javascript:void(0)" id="btn-delete-post"
-                                                        data-id="{{ $child->id }}" class="btn btn-danger btn-sm"><i
+                                                        data-id="{{ $child->nav_id }}" class="btn btn-danger btn-sm"><i
                                                             class="typcn typcn-trash"></i> DELETE</a>
                                                 </td>
                                             </tr>

@@ -19,12 +19,12 @@
 
             <!-- LOGO -->
             <div class="topbar-left">
-                <a href="index.html" class="logo">
+                {{-- <a href="index.html" class="logo">
                     <img src="{{ asset('style') }}/assets/images/logo.png" alt="" height="20"
                         class="logo-large">
                     <img src="{{ asset('style') }}/assets/images/logo-sm.png" alt="" height="22"
                         class="logo-sm">
-                </a>
+                </a> --}}
             </div>
 
             <nav class="navbar-custom">

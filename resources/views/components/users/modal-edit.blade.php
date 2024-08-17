@@ -12,34 +12,34 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Nama<span class="text-danger">*</span></label>
-                            <input type="text" name="name" class="form-control name"
-                                placeholder="Masukkan Nama" />
+                            <input type="text" name="user_name" class="form-control user_name"
+                                placeholder="Masukkan nama" />
                             <div class="alert alert-danger mt-2 d-none" role="alert" id="alert-name"></div>
                         </div>
                         <div class="form-group">
                             <label>Email<span class="text-danger">*</span></label>
-                            <input type="text" name="email" class="form-control icon email"
-                                placeholder="Type something" />
+                            <input type="text" name="user_mail" class="form-control icon user_mail"
+                                placeholder="Masukkan email" />
                             <div class="alert alert-danger mt-2 d-none" role="alert" id="alert-icon"></div>
                         </div>
-                        <small class="form-text">*NB : <em><span class="text-danger">*</span> (field must be
-                                filled)</em>
-                        </small>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="password">Password</label>
-                            <input type="password" class="form-control password" name="password"
-                                placeholder="Enter new password">
+                            <input type="password" class="form-control user_pass" name="user_pass"
+                                placeholder="Masukkan password">
                         </div>
                         <div class="form-group">
                             <label for="password-confirm">Confirm Password</label></label>
                             <input type="password" class="form-control password-confirm"
                                 name="password_confirmation" autocomplete="new-password"
-                                placeholder="Enter confirm password">
+                                placeholder="Masukkan password konfirmasi">
                         </div>
                     </div>
-                </div>
+                </div><!-- /.modal-body -->
+                <small class="form-text text-danger">*NB : <em><span class="text-danger">*</span> (field must be
+                    filled)</em>
+                </small>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i>
@@ -63,13 +63,12 @@
             type: "GET",
             cache: false,
             success: function(response) {
-                // console.log(response);
-                //fill data to form
-                $('#user_id').val(response.data.id);
-                $('.name').val(response.data.name);
-                $('.email').val(response.data.email);
                 //open modal
                 $('#modal-edit').modal('show');
+                //fill data to form
+                $('#user_id').val(response.data.user_id);
+                $('.user_name').val(response.data.user_name);
+                $('.user_mail').val(response.data.user_mail);
             }
         });
     });
@@ -80,20 +79,20 @@
         // define variable
         var token = document.getElementById('token').value;
         var user_id = $('#user_id').val();
-        var name = $('.name').val();
-        var email = $('.email').val();
-        var password = $('.password').val();
-        var passwordConfirmation = $('.password-confirm').val();
+        var user_name = $('.user_name').val();
+        var user_mail = $('.user_mail').val();
+        var user_pass = $('.user_pass').val();
+        // var passwordConfirmation = $('.password-confirm').val();
         // ajax
         $.ajax({
             url: `users/update/${user_id}`,
             type: "PUT",
             cache: false,
             data: {
-                "name": name,
-                "email": email,
-                "password": password,
-                "password_confirmation": passwordConfirmation,
+                "user_name": user_name,
+                "user_mail": user_mail,
+                "user_pass": user_pass,
+                // "password_confirmation": passwordConfirmation,
                 "_token": token
             },
             success: function(response) {

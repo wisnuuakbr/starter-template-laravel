@@ -9,18 +9,25 @@ class Navigation extends Model
 {
     use HasFactory;
     // TODO : ben iso njupuk id sek string mergo di custom ben ra leading zero nganggo $cast ya brow
-    // define atribute casting
+    // Define atribute casting
     protected $casts = [
-        'id' => 'string',
+        'nav_id' => 'string',
     ];
+
+    // Set nav_id as PK
+    protected $primaryKey = 'nav_id';
+
+    // set user_id as not auto increment
+    public $incrementing = false;
+
     protected $fillable = [
-        'id',
+        'nav_id',
         'parent_id',
-        'name',
-        'url',
-        'icon',
-        'sort',
-        'description',
+        'nav_title',
+        'nav_url',
+        'nav_icon',
+        'nav_no',
+        'nav_desc',
         'display_st'
     ];
 
@@ -31,7 +38,7 @@ class Navigation extends Model
 
     public function children()
     {
-        return $this->hasMany(self::class, 'parent_id')->orderBy('sort', 'asc');
+        return $this->hasMany(self::class, 'parent_id')->orderBy('nav_no', 'asc');
     }
 
     public function subMenus()

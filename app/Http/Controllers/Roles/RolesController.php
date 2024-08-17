@@ -1,0 +1,108 @@
+<?php
+
+namespace App\Http\Controllers\roles;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+
+// import models
+use App\Models\Roles;
+
+class RolesController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        //
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
+
+    // AJAX REQUESTS
+    public function getRoles(Request $request)
+    {
+        $search = $request->search;
+        if ($search == '') {
+            $data = Roles::orderby('role_name', 'asc')->select('role_id', 'role_name')->where('role_id')->limit(5)->get();
+        } else {
+            $data = Roles::orderby('role_name', 'asc')->select('role_id', 'role_name')->where('role_name', 'like', '%' . $search . '%')->limit(5)->get();
+        }
+        // create response
+        $response = array();
+        foreach ($data as $roles) {
+            $response[] = array(
+                "id"        => $roles->role_id,
+                "text"      => $roles->role_name
+            );
+        }
+        return response()->json($response);
+    }
+}

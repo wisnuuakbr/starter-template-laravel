@@ -15,50 +15,68 @@ class NavigationSeeder extends Seeder
      */
     public function run()
     {
+        // Defaut Home
         Navigation::create([
-            'id'            => '01001',
-            'name'          => 'Home',
-            'url'           => 'home',
-            'icon'          => 'typcn typcn-home-outline',
-            'description'   => 'Dashboard',
-            'display_st'    => '1'
+            'nav_id'     => '01001',
+            'nav_title'  => 'Home',
+            'nav_url'    => 'home',
+            'nav_icon'   => 'dripicons-home',
+            'nav_desc'   => 'Dashboard',
+            'nav_no'     => 1,
+            'display_st' => 1
+
+        ]);
+        // Default Settings
+        Navigation::create([
+            'nav_id'     => '01002',
+            'nav_title'  => 'Apps Settings',
+            'nav_url'    => '#',
+            'nav_icon'   => 'dripicons-gear',
+            'nav_desc'   => 'Pengaturan Aplikasi',
+            'nav_no'     => 2,
+            'display_st' => 1
 
         ]);
         Navigation::create([
-            'id'            => '01002',
-            'name'          => 'Settings',
-            'url'           => 'settings',
-            'icon'          => 'typcn typcn-cog-outline',
-            'description'   => 'Pengaturan Aplikasi',
-            'display_st'    => '1'
+            'nav_id'     => '0100201',
+            'nav_title'  => 'Navigations',
+            'nav_url'    => 'settings/navigations',
+            'nav_icon'   => '',
+            'parent_id'  => '01002',
+            'nav_desc'   => 'Pengaturan Navigasi Menu Aplikasi',
+            'nav_no'     => 1,
+            'display_st' => 1
 
         ]);
         Navigation::create([
-            'id'            => '01003',
-            'name'          => 'Navigations',
-            'url'           => 'settings/navigations',
-            'icon'          => '',
-            'parent_id'     => '01002',
-            'description'   => 'Pengaturan Navigasi Menu Aplikasi',
-            'display_st'    => '1'
-
+            'nav_id'     => '0100202',
+            'nav_title'  => 'Permissions',
+            'nav_url'    => 'permissions',
+            'nav_icon'   => '',
+            'parent_id'  => '01002',
+            'nav_desc'   => 'Pengaturan Izin Menu',
+            'nav_no'     => 2,
+            'display_st' => 1
+        ]);
+        // Default Management Users
+        Navigation::create([
+            'nav_id'     => '01003',
+            'nav_title'  => 'Management Users',
+            'nav_url'    => '#',
+            'nav_icon'   => 'dripicons-user-group',
+            'nav_desc'   => 'Pengaturan User',
+            'nav_no'     => 3,
+            'display_st' => 1
         ]);
         Navigation::create([
-            'id'            => '01004',
-            'name'          => 'Management Users',
-            'url'           => 'settings/users',
-            'icon'          => '',
-            'parent_id'     => '01002',
-            'description'   => 'Pengaturan User',
-            'display_st'    => '1'
-        ]);
-        Navigation::create([
-            'id'            => '01005',
-            'name'          => 'Permissions',
-            'url'           => 'permissions',
-            'icon'          => 'typcn typcn-group-outline',
-            'description'   => 'Pengaturan Izin Menu',
-            'display_st'    => '1'
+            'nav_id'     => '0100301',
+            'nav_title'  => 'User Admin',
+            'nav_url'    => 'settings/users',
+            'nav_icon'   => '',
+            'parent_id'  => '01003',
+            'nav_desc'   => 'Pengaturan User Admin',
+            'nav_no'     => 1,
+            'display_st' => 1
         ]);
     }
 }

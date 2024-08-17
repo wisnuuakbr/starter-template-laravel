@@ -12,37 +12,34 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Nama Menu<span class="text-danger">*</span></label>
-                            <input type="text" name="name" class="form-control name" id="name"
-                                placeholder="Type something" />
+                            <input type="text" name="nav_title" class="form-control nav_title" id="nav_title"
+                                placeholder="Masukkan nama menu" />
                             <div class="alert alert-danger mt-2 d-none" role="alert" id="alert-name"></div>
                         </div>
                         <div class="form-group">
                             <label>URL<span class="text-danger">*</span></label>
-                            <input type="text" name="url" class="form-control url" id="url"
-                                placeholder="Type something" />
+                            <input type="text" name="nav_url" class="form-control nav_url" id="nav_url"
+                                placeholder="Masukkan menu" />
                             <div class="alert alert-danger mt-2 d-none" role="alert" id="alert-url"></div>
                         </div>
                         <div class="form-group">
                             <label>Deskripsi</label>
-                            <textarea name="description" rows="5" class="form-control description" id="description"
-                                placeholder="Type something"></textarea>
+                            <textarea name="nav_desc" rows="5" class="form-control nav_desc" id="nav_desc"
+                                placeholder="Masukkan menu"></textarea>
                             <div class="alert alert-danger mt-2 d-none" role="alert" id="alert-description"></div>
                         </div>
-                        <small class="form-text">*NB : <em><span class="text-danger">*</span>
-                                (field must be filled)</em>
-                        </small>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Icon</label>
-                            <input type="text" name="icon" class="form-control icon" id="icon"
-                                placeholder="Type something" />
+                            <input type="text" name="nav_icon" class="form-control nav_icon" id="nav_icon"
+                                placeholder="Masukkan menu" />
                             <div class="alert alert-danger mt-2 d-none" role="alert" id="alert-icon"></div>
                         </div>
                         <div class="form-group">
                             <label>Urutan</label>
-                            <input type="number" name="sort" class="form-control sort" id="sort"
-                                placeholder="Type something" />
+                            <input type="number" name="nav_no" class="form-control nav_no" id="nav_no"
+                                placeholder="Masukkan menu" />
                             <div class="alert alert-danger mt-2 d-none" role="alert" id="alert-icon"></div>
                         </div>
                         <div class="form-group">
@@ -62,6 +59,9 @@
                         </div>
                     </div>
                 </div>
+                <small class="form-text text-danger">*NB : <em><span class="text-danger">*</span> (field must be
+                    filled)</em>
+                </small>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i>
@@ -119,22 +119,22 @@
             success: function(response) {
                 // console.log(response);
                 //fill data to form
-                $('#nav_id').val(response.data.id);
-                $('.name').val(response.data.name);
-                $('.url').val(response.data.url);
-                $('.icon').val(response.data.icon);
-                $('.sort').val(response.data.sort);
-                $('.description').val(response.data.description);
+                $('#nav_id').val(response.data.nav_id);
+                $('.nav_title').val(response.data.nav_title);
+                $('.nav_url').val(response.data.nav_url);
+                $('.nav_icon').val(response.data.nav_icon);
+                $('.nav_no').val(response.data.nav_no);
+                $('.nav_desc').val(response.data.nav_desc);
                 $('.display_st').val(response.data.display_st).trigger('change');
                 // Fetch the parent's name based on the parent_id
                 var parentName = '';
                 if (response.data.parent_id !== null) {
                     var parentItem = response.parent_items.find(function(item) {
-                        return item.id === response.data.parent_id;
+                        return item.nav_id === response.data.parent_id;
                     });
 
                     if (parentItem) {
-                        parentName = parentItem.name;
+                        parentName = parentItem.nav_title;
                     }
                 }
                 // Update the Select2 dropdown options
@@ -142,7 +142,7 @@
                 $parentDropdown.empty();
                 // Add the options to the Select2 dropdown
                 $.each(response.parent_items, function(index, item) {
-                    var option = new Option(item.name, item.id);
+                    var option = new Option(item.nav_title, item.nav_id);
                     $parentDropdown.append(option);
                 });
                 // Set the selected value of the Select2 dropdown
@@ -159,12 +159,12 @@
         // define variable
         var token = document.getElementById('token').value;
         var nav_id = $('#nav_id').val();
-        var name = $('.name').val();
-        var url = $('.url').val();
-        var icon = $('.icon').val();
+        var nav_title = $('.nav_title').val();
+        var nav_url = $('.nav_url').val();
+        var nav_icon = $('.nav_icon').val();
         var parent_id = $('.parent_id').val();
-        var sort = $('.sort').val();
-        var description = $('.description').val();
+        var nav_no = $('.nav_no').val();
+        var nav_desc = $('.nav_desc').val();
         var display_st = $('.display_st').select2('data')[0].id;
 
         // ajax
@@ -173,12 +173,12 @@
             type: "PUT",
             cache: false,
             data: {
-                "name": name,
-                "url": url,
-                "icon": icon,
+                "nav_title": nav_title,
+                "nav_url": nav_url,
+                "nav_icon": nav_icon,
                 "parent_id": parent_id,
-                "sort": sort,
-                "description": description,
+                "nav_no": nav_no,
+                "nav_desc": nav_desc,
                 "display_st": display_st,
                 "_token": token
             },

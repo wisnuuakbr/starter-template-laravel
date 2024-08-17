@@ -12,32 +12,29 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Nama Menu<span class="text-danger">*</span></label>
-                            <input type="text" name="name" class="form-control" id="name"
-                                placeholder="Type something" />
+                            <input type="text" name="nav_title" class="form-control" id="nav_title"
+                                placeholder="Masukkan nama menu" />
                         </div>
                         <div class="form-group">
                             <label>URL<span class="text-danger">*</span></label>
-                            <input type="text" name="url" class="form-control" id="url"
-                                placeholder="Type something" />
+                            <input type="text" name="nav_url" class="form-control" id="nav_url"
+                                placeholder="Masukkan url menu" />
                         </div>
                         <div class="form-group">
                             <label>Deskripsi</label>
-                            <textarea name="description" rows="5" class="form-control" id="description" placeholder="Type something"></textarea>
+                            <textarea name="nav_desc" rows="5" class="form-control" id="nav_desc" placeholder="Masukkan description menu"></textarea>
                         </div>
-                        <small class="form-text">*NB : <em><span class="text-danger">*</span> (field must be
-                                filled)</em>
-                        </small>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Icon</label>
-                            <input type="text" name="icon" class="form-control" id="icon"
-                                placeholder="Type something" />
+                            <input type="text" name="nav_icon" class="form-control" id="nav_icon"
+                                placeholder="Masukkan icon menu" />
                         </div>
                         <div class="form-group">
                             <label>Urutan</label>
-                            <input type="number" name="sort" class="form-control" id="sort"
-                                placeholder="Type something" />
+                            <input type="number" name="nav_no" class="form-control" id="nav_no"
+                                placeholder="Masukkan urutan menu" />
                         </div>
                         <div class="form-group">
                             <label>Ditampilkan</label>
@@ -54,6 +51,9 @@
                         </div>
                     </div> <!-- /.modal-col -->
                 </div> <!-- /.modal-row -->
+                <small class="form-text text-danger">*NB : <em><span class="text-danger">*</span> (field must be
+                    filled)</em>
+                </small>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i>
@@ -100,7 +100,6 @@
                 cache: true
             }
         });
-
     });
 
 
@@ -108,12 +107,12 @@
     $('#save').click(function(e) {
         e.preventDefault();
         var token = $('meta[name="csrf-token"]').attr('content');
-        var name = $('#name').val();
-        var url = $('#url').val();
-        var icon = $('#icon').val();
+        var nav_title = $('#nav_title').val();
+        var nav_url = $('#nav_url').val();
+        var nav_icon = $('#nav_icon').val();
         var parent_id = $('#parent_id').val();
-        var sort = $('#sort').val();
-        var description = $('#description').val();
+        var nav_no = $('#nav_no').val();
+        var nav_desc = $('#nav_desc').val();
         var display_st = $('.display_st').val();
 
         // ajax
@@ -122,12 +121,12 @@
             type: "POST",
             cache: false,
             data: {
-                "name": name,
-                "url": url,
-                "icon": icon,
+                "nav_title": nav_title,
+                "nav_url": nav_url,
+                "nav_icon": nav_icon,
                 "parent_id": parent_id,
-                "sort": sort,
-                "description": description,
+                "nav_no": nav_no,
+                "nav_desc": nav_desc,
                 "display_st": display_st,
                 "_token": token
             },

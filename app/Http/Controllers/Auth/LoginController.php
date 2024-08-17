@@ -3,55 +3,55 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
+// use App\Providers\RouteServiceProvider;
+// use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
+    protected $view_login = 'auth/';
 
-    use AuthenticatesUsers;
-
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    protected $redirectTo = RouteServiceProvider::HOME;
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('guest')->except('logout');
+    // Load view
+    public function login() {
+        if (Auth::check()) {
+            return redirect('home');
+        }else{
+            return view($this->view_login . 'login');
+        }
     }
 
-    public function login(Request $request)
-    {
-        $credentials = $request->only('email', 'password');
-        $remember = $request->has('remember');
+    // Login process
+    public function authenticate(Request $request) {
+        $email = $request->input('user_mail');
+        $password = $request->input('user_pass');
 
-        if (Auth::attempt($credentials, $remember)) {
-            return redirect()->intended($this->redirectTo);
-        } else {
+        // Determine of the login field is an email or a username
+        $loginfield = filter_var($email, FILTER_VALIDATE_EMAIL)? 'user_mail' : 'user_name';
+
+        // Attemot to authenticate with either email or username
+        $data = [
+            $loginfield => $email,
+            'password' => $password,
+        ];
+
+        if (Auth::Attempt($data)) {
+            return redirect('home');
+        }else{
             return redirect()->back()->withErrors([
-                'email' => 'The provided credentials do not match our records.',
+                'user_mail' => 'The provided credentials do not match our records.',
             ]);
         }
+    }
+
+    // Logout Process
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        // redirect
+        return redirect()->route('login');
     }
 }
