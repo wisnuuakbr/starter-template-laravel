@@ -11,9 +11,15 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>Nama<span class="text-danger">*</span></label>
+                            <label>Nama Lengkap<span class="text-danger">*</span></label>
+                            <input type="text" name="user_alias" class="form-control user_alias"
+                                placeholder="Masukkan nama lengkap" />
+                            <div class="alert alert-danger mt-2 d-none" role="alert" id="alert-name"></div>
+                        </div>
+                        <div class="form-group">
+                            <label>Username<span class="text-danger">*</span></label>
                             <input type="text" name="user_name" class="form-control user_name"
-                                placeholder="Masukkan nama" />
+                                placeholder="Masukkan username" />
                             <div class="alert alert-danger mt-2 d-none" role="alert" id="alert-name"></div>
                         </div>
                         <div class="form-group">
@@ -24,6 +30,12 @@
                         </div>
                     </div>
                     <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Role</label>
+                            <select id="role_id" class="form-control role_id">
+                                <option value=""></option>
+                            </select>
+                        </div>
                         <div class="form-group">
                             <label for="password">Password</label>
                             <input type="password" class="form-control user_pass" name="user_pass"
@@ -54,45 +66,85 @@
 <script src="{{ asset('style') }}/assets/js/jquery.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script type="text/javascript">
+    $(document).ready(function() {
+        // Initialize Select2 for role selection
+        var _token = $('meta[name="csrf-token"]').attr('content');
+        $(".role_id").select2({
+            dropdownParent: $('#modal-edit'),
+            placeholder: 'Choose Roles',
+            ajax: {
+                url: "{{ route('getRoles') }}",
+                type: "get",
+                dataType: 'json',
+                delay: 250,
+                data: function(params) {
+                    return {
+                        token: _token,
+                        search: params.term // search term
+                    };
+                },
+                processResults: function(response) {
+                    console.log(response);
+                    return {
+                        results: response
+                    };
+                },
+                cache: true
+            }
+        });
+    });
     // fetch data
     $('body').on('click', '#btn-edit-post', function() {
         var user_id = $(this).data('id');
-        //fetch detail post with ajax
+        // fetch detail post with ajax
         $.ajax({
             url: `users/show/${user_id}`,
             type: "GET",
-            cache: false,
+            cache: true,
             success: function(response) {
-                //open modal
+                // open modal
                 $('#modal-edit').modal('show');
-                //fill data to form
-                $('#user_id').val(response.data.user_id);
-                $('.user_name').val(response.data.user_name);
-                $('.user_mail').val(response.data.user_mail);
+                // fill data to form
+                $('#user_id').val(response.data.user.user_id);
+                $('.user_alias').val(response.data.user.user_alias);
+                $('.user_name').val(response.data.user.user_name);
+                $('.user_mail').val(response.data.user.user_mail);
+
+                // Set selected role in Select2
+                if (response.data.role.role_id) {
+                    var newOption = new Option(response.data.role.role_name, response.data.role.role_id, true, true);
+                    $('.role_id').append(newOption).trigger('change');
+
+                    // Manually select the role option
+                    $('.role_id').val(response.data.role.role_id).trigger('change');
+                }
             }
         });
     });
 
-    //action update
+
+    // action update
     $('#update').click(function(e) {
         e.preventDefault();
         // define variable
         var token = document.getElementById('token').value;
         var user_id = $('#user_id').val();
-        var user_name = $('.user_name').val();
-        var user_mail = $('.user_mail').val();
-        var user_pass = $('.user_pass').val();
-        // var passwordConfirmation = $('.password-confirm').val();
+        var user_alias = $('.user_alias').val();
+        var role_id = $('.role_id').val();
+        var user_name  = $('.user_name').val();
+        var user_mail  = $('.user_mail').val();
+        var user_pass  = $('.user_pass').val();
         // ajax
         $.ajax({
             url: `users/update/${user_id}`,
             type: "PUT",
-            cache: false,
+            cache: true,
             data: {
+                "user_alias": user_alias,
+                "role_id": role_id,
                 "user_name": user_name,
                 "user_mail": user_mail,
                 "user_pass": user_pass,
-                // "password_confirmation": passwordConfirmation,
                 "_token": token
             },
             success: function(response) {
@@ -109,7 +161,7 @@
                     location.reload(); // then reload the page.(3)
                 }, 1000);
 
-                //close modal
+                // close modal
                 $('#modal-edit').modal('hide');
             },
             error: function(response) {

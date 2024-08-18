@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 // import models
-use App\Models\Roles;
+use App\Models\Role;
 
 class RolesController extends Controller
 {
@@ -91,16 +91,16 @@ class RolesController extends Controller
     {
         $search = $request->search;
         if ($search == '') {
-            $data = Roles::orderby('role_name', 'asc')->select('role_id', 'role_name')->where('role_id')->limit(5)->get();
+            $roles = Role::orderby('role_name', 'asc')->select('role_id', 'role_name')->limit(5)->get();
         } else {
-            $data = Roles::orderby('role_name', 'asc')->select('role_id', 'role_name')->where('role_name', 'like', '%' . $search . '%')->limit(5)->get();
+            $roles = Role::orderby('role_name', 'asc')->select('role_id', 'role_name')->where('role_name', 'like', '%' . $search . '%')->limit(5)->get();
         }
         // create response
         $response = array();
-        foreach ($data as $roles) {
+        foreach ($roles as $data) {
             $response[] = array(
-                "id"        => $roles->role_id,
-                "text"      => $roles->role_name
+                "id"        => $data->role_id,
+                "text"      => $data->role_name
             );
         }
         return response()->json($response);

@@ -23,9 +23,9 @@ use App\Http\Controllers\Auth\GoogleLoginController;
 |
 */
 // Login Route
-// Route::get('/', function () {
-//     return view('auth.login');
-// })->name('login');
+Route::get('/', function () {
+    return redirect()->route('login');
+});
 
 // Auth::routes();
 
@@ -55,5 +55,7 @@ Route::middleware(['auth'])->group(function () {
     // Navigations Route
     route::resource('settings/navigations', NavigationsController::class);
     route::get('getNavigations', [NavigationsController::class, 'getNavigations'])->name('getNavigations');
+    // Roles Route
+    route::get('getRoles', [RolesController::class, 'getRoles'])->name('getRoles');
 
 });

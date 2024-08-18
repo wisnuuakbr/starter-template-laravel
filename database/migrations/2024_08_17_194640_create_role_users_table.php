@@ -14,9 +14,12 @@ class CreateRoleUsersTable extends Migration
     public function up()
     {
         Schema::create('role_users', function (Blueprint $table) {
-            $table->id('role_id', 5);
             $table->string('user_id', 10);
+            $table->bigInteger('role_id', false, true);
             $table->timestamps();
+
+            // Set combination role_id and user_id as PK
+            $table->primary(['user_id', 'role_id']);
 
             // Add foreign key constraint
             $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade');

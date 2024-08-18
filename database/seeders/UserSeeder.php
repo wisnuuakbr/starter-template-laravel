@@ -24,14 +24,17 @@ class UserSeeder extends Seeder
             'user_alias'        => 'Wisnu Akbara',
             'user_name'         => 'Wisnu',
             'user_mail'         => 'wisnu@varx.co.id',
-            'email_verified_at' => now(),
             'user_pass'         => Hash::make('wisnu123'),
-            'remember_token'    => Str::random(10)
+            'email_verified_at' => now(),
+            'remember_token'    => Str::random(10),
+            'created_at'        => now(),
         ]);
 
         // Insert to user roles table
         DB::table('role_users')->insert([
-            'user_id'   => $user_id
+            'role_id'    => '1',
+            'user_id'    => $user_id,
+            'created_at' => now(),
         ]);
     }
 }

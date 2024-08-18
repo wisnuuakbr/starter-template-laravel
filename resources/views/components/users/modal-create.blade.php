@@ -11,13 +11,13 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="fullname">Nama Lengkap<span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" name="user_full_name" id="user_full_name"
+                            <input type="text" class="form-control" name="user_alias" id="user_alias"
                                 placeholder="Masukkan nama lengkap">
                         </div>
                         <div class="form-group">
                             <label for="name">Username<span class="text-danger">*</span></label>
                             <input type="text" class="form-control" name="user_name" id="user_name"
-                                placeholder="Masukkan user name">
+                                placeholder="Masukkan username">
                         </div>
                         <div class="form-group">
                             <label for="email">Email<span class="text-danger">*</span></label>
@@ -28,7 +28,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Role</label>
-                            <select id="role_id" class="form-control role_id">
+                            <select id="role_id" class="form-control">
                                 <option value=""></option>
                             </select>
                         </div>
@@ -69,14 +69,44 @@
         $('#modal-create').modal('show');
     });
 
+    // get roles
+    $(document).ready(function() {
+        var _token = $('meta[name="csrf-token"]').attr('content');
+        $("#role_id").select2({
+            dropdownParent: $('#modal-create'),
+            placeholder: 'Choose Roles',
+            ajax: {
+                url: "{{ route('getRoles') }}",
+                type: "get",
+                dataType: 'json',
+                delay: 250,
+                data: function(params) {
+                    return {
+                        token: _token,
+                        search: params.term // search term
+                    };
+                },
+                processResults: function(response) {
+                    console.log(response);
+                    return {
+                        results: response
+                    };
+                },
+                cache: true
+            }
+        });
+    });
+
     // action create post
     $('#save').click(function(e) {
         e.preventDefault();
         // define variable
-        var token = $('meta[name="csrf-token"]').attr('content');
-        var user_name = $('#user_name').val();
-        var user_mail = $('#user_mail').val();
-        var user_pass = $('#user_pass').val();
+        var token                = $('meta[name="csrf-token"]').attr('content');
+        var user_alias           = $('#user_alias').val();
+        var user_name            = $('#user_name').val();
+        var role_id              = $('#role_id').val();
+        var user_mail            = $('#user_mail').val();
+        var user_pass            = $('#user_pass').val();
         var passwordConfirmation = $('#password-confirm').val();
         // ajax
         $.ajax({
@@ -84,7 +114,9 @@
             type: "POST",
             cache: false,
             data: {
+                "user_alias": user_alias,
                 "user_name": user_name,
+                "role_id": role_id,
                 "user_mail": user_mail,
                 "user_pass": user_pass,
                 "password_confirmation": passwordConfirmation,

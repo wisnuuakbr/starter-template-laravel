@@ -24,9 +24,17 @@
                                 @forelse ($user as $data)
                                     <tr>
                                         <th class="text-center">{{ $no++ }}</th>
-                                        <td >{{ $data->user_name }}</td>
+                                        <td>{{ $data->user_alias }}</td>
                                         <td>{{ $data->user_mail }}</td>
-                                        <td></td>
+                                        <td class="text-center text-uppercase">
+                                            @if ($data->role_name === 'Developer')
+                                                <span class="badge badge-warning text-white" style="padding: 0.75em 1.5em;">{{ $data->role_name }}</span>
+                                            @elseif ($data->role_name === 'Admin')
+                                                <span class="badge badge-success" style="padding: 0.75em 1.5em;">{{ $data->role_name }}</span>
+                                            @else
+                                                <span class="badge badge-primary" style="padding: 0.75em 1.5em;">{{ $data->role_name }}</span>
+                                            @endif
+                                        </td>
                                         <td class="text-center">
                                             <a href="javascript:void(0)" id="btn-edit-post" data-id="{{ $data->user_id }}"
                                                 class="btn btn-warning btn-sm"><i class="typcn typcn-edit"></i> EDIT</a>
@@ -60,11 +68,12 @@
 
             Swal.fire({
                 title: 'Apakah Kamu Yakin?',
-                text: "ingin menghapus data ini!",
+                text: "data akan dihapus permanent!",
                 icon: 'warning',
                 showCancelButton: true,
                 cancelButtonText: 'TIDAK',
-                confirmButtonText: 'YA, HAPUS!'
+                confirmButtonText: 'YA, HAPUS!',
+                confirmButtonColor: '#d33'
             }).then((result) => {
                 if (result.isConfirmed) {
                     //fetch to delete data

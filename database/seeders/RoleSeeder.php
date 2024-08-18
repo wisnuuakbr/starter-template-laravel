@@ -17,15 +17,18 @@ class RoleSeeder extends Seeder
         DB::table('roles')->insert([
             [
                 'role_name' => 'Developer',
-                'role_desc' => 'Has full access to all functionalities',
+                'role_desc' => 'Has full access to all functionalities and menu',
+                'created_at' => now()
             ],
             [
-                'role_name' => 'Administrator',
+                'role_name' => 'Admin',
                 'role_desc' => 'Has full access to all admin menu',
+                'created_at' => now()
             ],
             [
-                'role_name' => 'Casheer',
-                'role_desc' => 'Can manage transaction',
+                'role_name' => 'Cashier',
+                'role_desc' => 'Can manage transaction only',
+                'created_at' => now()
             ],
         ]);
     }
