@@ -76,38 +76,6 @@
 <script src="{{ asset('style') }}/assets/js/jquery.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script type="text/javascript">
-    // select2
-    $(document).ready(function() {
-        // select display_st
-        $('.display_st').select2();
-
-        // select parents
-        var _token = $('meta[name="csrf-token"]').attr('content');
-        $(".parent_id").select2({
-            placeholder: 'Choose Parent',
-            dropdownParent: $('#modal-edit'),
-            allowClear: true,
-            ajax: {
-                url: "{{ route('getNavigations') }}",
-                type: "get",
-                dataType: 'json',
-                delay: 250,
-                data: function(params) {
-                    return {
-                        token: _token,
-                        search: params.term // search term
-                    };
-                },
-                processResults: function(response) {
-                    return {
-                        results: response
-                    };
-                },
-                cache: true
-            }
-        });
-    });
-
     // fetch data
     $('body').on('click', '#btn-edit-post', function() {
         var nav_id = $(this).data('id');
@@ -118,6 +86,8 @@
             cache: false,
             success: function(response) {
                 // console.log(response);
+                //open modal
+                $('#modal-edit').modal('show');
                 //fill data to form
                 $('#nav_id').val(response.data.nav_id);
                 $('.nav_title').val(response.data.nav_title);
@@ -147,8 +117,38 @@
                 });
                 // Set the selected value of the Select2 dropdown
                 $parentDropdown.val(response.data.parent_id).trigger('change');
-                //open modal
-                $('#modal-edit').modal('show');
+            }
+        });
+    });
+
+    // select2
+    $(document).ready(function() {
+        // select display_st
+        $('.display_st').select2();
+
+        // select parents
+        var _token = $('meta[name="csrf-token"]').attr('content');
+        $(".parent_id").select2({
+            placeholder: 'Choose Parent',
+            dropdownParent: $('#modal-edit'),
+            allowClear: true,
+            ajax: {
+                url: "{{ route('getNavigations') }}",
+                type: "get",
+                dataType: 'json',
+                delay: 250,
+                data: function(params) {
+                    return {
+                        token: _token,
+                        search: params.term // search term
+                    };
+                },
+                processResults: function(response) {
+                    return {
+                        results: response
+                    };
+                },
+                cache: true
             }
         });
     });

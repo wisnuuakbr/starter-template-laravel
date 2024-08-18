@@ -135,7 +135,7 @@ class NavigationsController extends Controller
         $parentItems = Navigation::where('nav_id', '!=', $nav_id)->get(['nav_id', 'nav_title']);
         return response()->json([
             'success'       => true,
-            'message'       => 'Detail data',
+            'message'       => 'Data berhasil diambil!',
             'data'          => $data,
             'parent_items'  => $parentItems
         ]);
@@ -273,7 +273,7 @@ class NavigationsController extends Controller
         //return response
         return response()->json([
             'success' => true,
-            'message' => 'Data Berhasil Dihapus!'
+            'message' => 'Data berhasil dihapus!'
         ]);
     }
 

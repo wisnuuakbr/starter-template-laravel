@@ -102,7 +102,8 @@
                 icon: 'warning',
                 showCancelButton: true,
                 cancelButtonText: 'TIDAK',
-                confirmButtonText: 'YA, HAPUS!'
+                confirmButtonText: 'YA, HAPUS!',
+                confirmButtonColor: '#d33'
             }).then((result) => {
                 if (result.isConfirmed) {
                     //fetch to delete data

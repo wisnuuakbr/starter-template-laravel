@@ -23,8 +23,8 @@ class NavigationSeeder extends Seeder
             'nav_icon'   => 'dripicons-home',
             'nav_desc'   => 'Dashboard',
             'nav_no'     => 1,
-            'display_st' => 1
-
+            'display_st' => 1,
+            'created_at' => now()
         ]);
         // Default Settings
         Navigation::create([
@@ -34,8 +34,8 @@ class NavigationSeeder extends Seeder
             'nav_icon'   => 'dripicons-gear',
             'nav_desc'   => 'Pengaturan Aplikasi',
             'nav_no'     => 2,
-            'display_st' => 1
-
+            'display_st' => 1,
+            'created_at' => now()
         ]);
         Navigation::create([
             'nav_id'     => '0100201',
@@ -45,8 +45,8 @@ class NavigationSeeder extends Seeder
             'parent_id'  => '01002',
             'nav_desc'   => 'Pengaturan Navigasi Menu Aplikasi',
             'nav_no'     => 1,
-            'display_st' => 1
-
+            'display_st' => 1,
+            'created_at' => now()
         ]);
         Navigation::create([
             'nav_id'     => '0100202',
@@ -56,7 +56,8 @@ class NavigationSeeder extends Seeder
             'parent_id'  => '01002',
             'nav_desc'   => 'Pengaturan Izin Menu',
             'nav_no'     => 2,
-            'display_st' => 1
+            'display_st' => 1,
+            'created_at' => now()
         ]);
         // Default Management Users
         Navigation::create([
@@ -66,7 +67,8 @@ class NavigationSeeder extends Seeder
             'nav_icon'   => 'dripicons-user-group',
             'nav_desc'   => 'Pengaturan User',
             'nav_no'     => 3,
-            'display_st' => 1
+            'display_st' => 1,
+            'created_at' => now()
         ]);
         Navigation::create([
             'nav_id'     => '0100301',
@@ -76,7 +78,8 @@ class NavigationSeeder extends Seeder
             'parent_id'  => '01003',
             'nav_desc'   => 'Pengaturan User Admin',
             'nav_no'     => 1,
-            'display_st' => 1
+            'display_st' => 1,
+            'created_at' => now()
         ]);
     }
 }
