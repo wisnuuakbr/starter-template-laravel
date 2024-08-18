@@ -1,5 +1,5 @@
 <div class="modal fade" id="modal-edit" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title mt-0">Edit Data Navigation</h5>
@@ -76,6 +76,16 @@
 <script src="{{ asset('style') }}/assets/js/jquery.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script type="text/javascript">
+    // touchspin
+    $(document).ready(function() {
+        $(".nav_no").TouchSpin({
+            min: 0,          // Minimum value
+            max: 100,        // Maximum value
+            step: 1,         // Step increment
+            boostat: 5,      // Step value when boosted
+            maxboostedstep: 10, // Max step value when boosted
+        });
+    });
     // fetch data
     $('body').on('click', '#btn-edit-post', function() {
         var nav_id = $(this).data('id');
@@ -200,13 +210,38 @@
                 $('#modal-edit').modal('hide');
             },
             error: function(response) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Cek kembali form anda!',
-                    showConfirmButton: false,
-                    timer: 2000
-                })
+                if(response.status === 422) {
+                    // Clear previous errors
+                    $('.text-danger').remove();
+                    $('input').removeClass('is-invalid');
+
+                    // Show validation errors
+                    $.each(response.responseJSON, function (key, value) {
+                        var inputField = $('.' + key);
+
+                        // Save original placeholder and value
+                        var originalPlaceholder = inputField.attr('placeholder');
+                        var originalValue = inputField.val();
+
+                        // Display error as placeholder
+                        inputField.val('');
+                        inputField.addClass('is-invalid').attr('placeholder', value[0]).addClass('error-placeholder');
+
+                        // Remove errors and reset placeholder after 3 seconds
+                        setTimeout(function() {
+                            inputField.removeClass('is-invalid error-placeholder');
+                            inputField.attr('placeholder', originalPlaceholder).val(originalValue);
+                        }, 2000); // 2000 ms = 2 seconds
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Cek kembali form anda!',
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
+                }
             }
         });
     });

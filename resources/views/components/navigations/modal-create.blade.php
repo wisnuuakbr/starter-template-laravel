@@ -1,6 +1,6 @@
 <div class="modal fade" id="modal-create" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
     aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title mt-0">Tambah Data Navigation</h5>
@@ -31,10 +31,14 @@
                             <input type="text" name="nav_icon" class="form-control" id="nav_icon"
                                 placeholder="Masukkan icon menu" />
                         </div>
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             <label>Urutan</label>
                             <input type="number" name="nav_no" class="form-control" id="nav_no"
                                 placeholder="Masukkan urutan menu" />
+                        </div> --}}
+                        <div class="form-group">
+                            <label>Urutan</label>
+                            <input id="nav_no" type="number" value="" name="nav_no">
                         </div>
                         <div class="form-group">
                             <label>Ditampilkan</label>
@@ -72,6 +76,17 @@
     $('body').on('click', '#btn-create-post', function() {
         //open modal
         $('#modal-create').modal('show');
+    });
+
+    // touchspin
+    $(document).ready(function() {
+        $("#nav_no").TouchSpin({
+            min: 0,          // Minimum value
+            max: 100,        // Maximum value
+            step: 1,         // Step increment
+            boostat: 5,      // Step value when boosted
+            maxboostedstep: 10, // Max step value when boosted
+        });
     });
 
     // select2 data parents
@@ -148,13 +163,38 @@
                 $('#modal-create').modal('hide');
             },
             error: function(response) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Cek kembali form anda!',
-                    showConfirmButton: false,
-                    timer: 2000
-                })
+                if(response.status === 422) {
+                    // Clear previous errors
+                    $('.text-danger').remove();
+                    $('input').removeClass('is-invalid');
+
+                    // Show validation errors
+                    $.each(response.responseJSON, function (key, value) {
+                        var inputField = $('#' + key);
+
+                        // Save original placeholder and value
+                        var originalPlaceholder = inputField.attr('placeholder');
+                        var originalValue = inputField.val();
+
+                        // Display error as placeholder
+                        inputField.val('');
+                        inputField.addClass('is-invalid').attr('placeholder', value[0]).addClass('error-placeholder');
+
+                        // Remove errors and reset placeholder after 3 seconds
+                        setTimeout(function() {
+                            inputField.removeClass('is-invalid error-placeholder');
+                            inputField.attr('placeholder', originalPlaceholder).val(originalValue);
+                        }, 2000); // 2000 ms = 2 seconds
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Cek kembali form anda!',
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
+                }
             }
         });
     });

@@ -1,5 +1,5 @@
 <div class="modal fade" id="modal-edit" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title mt-0">Edit Data Users</h5>
@@ -14,19 +14,16 @@
                             <label>Nama Lengkap<span class="text-danger">*</span></label>
                             <input type="text" name="user_alias" class="form-control user_alias"
                                 placeholder="Masukkan nama lengkap" />
-                            <div class="alert alert-danger mt-2 d-none" role="alert" id="alert-name"></div>
                         </div>
                         <div class="form-group">
                             <label>Username<span class="text-danger">*</span></label>
                             <input type="text" name="user_name" class="form-control user_name"
                                 placeholder="Masukkan username" />
-                            <div class="alert alert-danger mt-2 d-none" role="alert" id="alert-name"></div>
                         </div>
                         <div class="form-group">
                             <label>Email<span class="text-danger">*</span></label>
                             <input type="text" name="user_mail" class="form-control icon user_mail"
                                 placeholder="Masukkan email" />
-                            <div class="alert alert-danger mt-2 d-none" role="alert" id="alert-icon"></div>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -71,7 +68,7 @@
         var _token = $('meta[name="csrf-token"]').attr('content');
         $(".role_id").select2({
             dropdownParent: $('#modal-edit'),
-            placeholder: 'Choose Roles',
+            placeholder: 'Pilih Roles',
             ajax: {
                 url: "{{ route('getRoles') }}",
                 type: "get",
@@ -165,13 +162,38 @@
                 $('#modal-edit').modal('hide');
             },
             error: function(response) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Cek kembali form anda!',
-                    showConfirmButton: false,
-                    timer: 2000
-                })
+                if(response.status === 422) {
+                    // Clear previous errors
+                    $('.text-danger').remove();
+                    $('input').removeClass('is-invalid');
+
+                    // Show validation errors
+                    $.each(response.responseJSON, function (key, value) {
+                        var inputField = $('.' + key);
+
+                        // Save original placeholder and value
+                        var originalPlaceholder = inputField.attr('placeholder');
+                        var originalValue = inputField.val();
+
+                        // Display error as placeholder
+                        inputField.val('');
+                        inputField.addClass('is-invalid').attr('placeholder', value[0]).addClass('error-placeholder');
+
+                        // Remove errors and reset placeholder after 3 seconds
+                        setTimeout(function() {
+                            inputField.removeClass('is-invalid error-placeholder');
+                            inputField.attr('placeholder', originalPlaceholder).val(originalValue);
+                        }, 2000); // 2000 ms = 2 seconds
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Cek kembali form anda!',
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
+                }
             }
         });
     });

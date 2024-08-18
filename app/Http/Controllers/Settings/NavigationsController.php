@@ -46,11 +46,17 @@ class NavigationsController extends Controller
      */
     public function store(Request $request)
     {
-        //define validasi
+        // Custom error messages
+        $messages = [
+            'nav_title.required' => 'Nama menu wajib diisi!',
+            'nav_url.required'   => 'URL wajib diisi!',
+        ];
+
+        // Define validation with custom message
         $validator = Validator::make($request->all(), [
             'nav_title'  => 'required',
             'nav_url'   => 'required'
-        ]);
+        ], $messages);
 
         //check validasi fail
         if ($validator->fails()) {
@@ -163,11 +169,18 @@ class NavigationsController extends Controller
     {
         // define id
         $data = Navigation::find($nav_id);
+
+        // Custom error messages
+        $messages = [
+            'nav_title.required' => 'Nama menu wajib diisi!',
+            'nav_url.required'   => 'URL wajib diisi!',
+        ];
+
         //define validasi
         $validator = Validator::make($request->all(), [
             'nav_title'  => 'required',
             'nav_url'   => 'required'
-        ]);
+        ], $messages);
 
         //check validasi fail
         if ($validator->fails()) {

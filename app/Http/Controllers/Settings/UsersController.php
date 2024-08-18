@@ -63,6 +63,16 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
+        // Custom error messages
+        $messages = [
+            'user_name.required'    => 'Username wajib diisi!',
+            'user_alias.required'   => 'Nama lengkap wajib diisi!',
+            'user_mail.required'    => 'Email wajib diisi!',
+            'role_id.required'      => 'Role wajib diisi!',
+            'user_pass.required'    => 'Password wajib diisi!',
+            'password_confirmation.required'   => 'Konfirmasi password wajib diisi!',
+        ];
+
         $validator = Validator::make($request->all(), [
             'user_name'             => ['required', 'string', 'max:10'],
             'user_alias'            => ['required', 'string', 'max:255'],
@@ -70,7 +80,7 @@ class UsersController extends Controller
             'role_id'               => ['required', 'exists:roles,role_id'],
             'user_pass'             => ['required', 'min:8'],
             'password_confirmation' => ['required', 'same:user_pass']
-        ]);
+        ], $messages);
 
         //check validasi fail
         if ($validator->fails()) {
@@ -159,6 +169,15 @@ class UsersController extends Controller
     {
         // define id
         $data = User::findOrFail($user_id);
+
+        // Custom error messages
+        $messages = [
+            'user_name.required'    => 'Username wajib diisi!',
+            'user_alias.required'   => 'Nama lengkap wajib diisi!',
+            'user_mail.required'    => 'Email wajib diisi!',
+            'role_id.required'      => 'Role wajib diisi!',
+        ];
+
         //define validasi
         $validator = Validator::make($request->all(), [
             'user_name'             => ['required', 'string', 'max:10'],
@@ -167,7 +186,7 @@ class UsersController extends Controller
             'user_mail'             => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user_id, 'user_id')],
             'user_pass'             => ['nullable', 'string', 'min:8'],
             'password_confirmation' => ['same:user_pass']
-        ]);
+        ], $messages);
 
         // check validasi fail
         if ($validator->fails()) {

@@ -1,6 +1,6 @@
 <div class="modal fade" id="modal-create" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
     aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title mt-0">Tambah Data Users</h5>
@@ -74,7 +74,7 @@
         var _token = $('meta[name="csrf-token"]').attr('content');
         $("#role_id").select2({
             dropdownParent: $('#modal-create'),
-            placeholder: 'Choose Roles',
+            placeholder: 'Pilih Roles',
             ajax: {
                 url: "{{ route('getRoles') }}",
                 type: "get",
@@ -140,13 +140,38 @@
                 $('#modal-create').modal('hide');
             },
             error: function(response) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Cek kembali form anda!',
-                    showConfirmButton: false,
-                    timer: 2000
-                })
+                if(response.status === 422) {
+                    // Clear previous errors
+                    $('.text-danger').remove();
+                    $('input').removeClass('is-invalid');
+
+                    // Show validation errors
+                    $.each(response.responseJSON, function (key, value) {
+                        var inputField = $('#' + key);
+
+                        // Save original placeholder and value
+                        var originalPlaceholder = inputField.attr('placeholder');
+                        var originalValue = inputField.val();
+
+                        // Display error as placeholder
+                        inputField.val('');
+                        inputField.addClass('is-invalid').attr('placeholder', value[0]).addClass('error-placeholder');
+
+                        // Remove errors and reset placeholder after 3 seconds
+                        setTimeout(function() {
+                            inputField.removeClass('is-invalid error-placeholder');
+                            inputField.attr('placeholder', originalPlaceholder).val(originalValue);
+                        }, 2000); // 2000 ms = 2 seconds
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Cek kembali form anda!',
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
+                }
             }
         });
     });

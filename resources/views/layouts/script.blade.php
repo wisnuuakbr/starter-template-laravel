@@ -9,3 +9,5 @@
 <script src="{{ asset('style') }}/assets/js/app.js"></script>
 <!-- Plugins -->
 <script src="{{ asset('plugins/select2/js/select2.min.js') }}"></script>
+<script src="{{ asset('plugins/bootstrap-touchspin/js/jquery.bootstrap-touchspin.min.js') }}"></script>
+
